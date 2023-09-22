@@ -14,3 +14,29 @@ AWS Skills
 
 ## DNS Setup
 http://webprogramming260austin.click
+
+## Caddy
+myfunkychickens.click {
+   root * /usr/share/caddy
+   file_server
+   header Cache-Control no-store
+   header -etag
+   header -server
+   }
+
+
+startup.myfunkychickens.click {
+   reverse_proxy * localhost:4000
+   header Cache-Control no-store
+   header -server
+   header -etag
+   header Access-Control-Allow-Origin *
+}
+
+simon.myfunkychickens.click {
+   reverse_proxy * localhost:3000
+   header Cache-Control no-store
+   header -server
+   header -etag
+   header Access-Control-Allow-Origin *
+}
