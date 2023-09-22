@@ -28,4 +28,4 @@ Design flow of website. Could change with new ideas.
 ### Technology
 * **Authentication**: The user will be able to login securly with a username and password. Credentials will be stored within a database. Can't access chat, leaderboard or the ability to submit submissions unless authenticated.
 * **Database data**: Ther server will pull in data associted with the filter for time (day, week, year) and create a pie chart / graph associated. The graph will be divided by subject and display a percentage associated with each subject.
-* **WebSocket data**: Websocket data will include at chat that users can use to communicate. Along with the implementation of the highest average time for a given subject in a leaderboard. The Websocket will update this data constantly as it is submitted. The chat can also be cleared by the admin.  
+* **WebSocket data**: Websocket data will include a chat that users can use to communicate. Along with the implementation of the highest average time for a given subject in a leaderboard. The Websocket will update this data constantly as it is submitted. The chat can also be cleared by the admin.  
