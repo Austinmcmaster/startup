@@ -5,7 +5,7 @@
 ### Elevator Pitch
 Have you ever questioned how much time you have spent on certain acitvities, such as homework, hobbies or classes and want to understand where your time is most spent? This application is focused on adding entries which can be subjects, hobbies or other task and calculating your data in an easy format to see where your time is spent. So simply, a user inputs a subject along with a time entry. The server end will grab the data associated with them and create a pie chart / graph showing allocated time. The program will calculate highest average time per subject and display on a leaderboard. A chat service will also be accessible for users.
 ### Design
-
+![Home Page]("C:\Users\Austi\OneDrive\Documents\BYU\Fall_2023\CS260\startup\Home Page.png")
 ### Key Features
 * Secure login over HTTPS
 * Ability to create subject
