@@ -36,6 +36,7 @@ For this deliverable I built out the structure of my application using HTML.
 
 * **HTML pages**- Created three HTML Pages that represent Login, Home Page where users can view there data, and pie chart associated with the data. The leaderboard for data updates is displayed, along with a web socket for a chat. The pie chart is also will access the data and calculate the image later on. There is also a section to create new time entries. The last page for user data, can modify existing time entries. Also you can submit more entries.
 * **Links**- The index.html, user data pages both links to all other pages. If login is sucessful then you move to home page.
+* **Service calls placeholder**- I may implement a location feature when someone submits a new time entry. So I may want to do a google api call. As of right now an API to make a pie chart is my current place holder unless I can do that myself.
 * **Text**- Dummy data is used for filling the current time entries.
 * **Images**- Have a website logo for each of the pages
 * **Login**- Input and password are implemented and if text is entered to both, then the submit button is accessible.
