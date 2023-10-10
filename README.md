@@ -42,3 +42,14 @@ For this deliverable I built out the structure of my application using HTML.
 * **Login**- Input and password are implemented and if text is entered to both, then the submit button is accessible.
 * **Database**- Pie Chart, time entries(with subjects), leaderboard updates. These are all associated with the database.
 * **WebSocket**- The web chat input box will fulfill the websocket in the future.
+
+## CSS deliverable
+
+For this deliverable I properly styled the application into its final appearence.
+
+* **Header,footer and main content body**
+* **Navigation elements**
+* **Responsive to window resizing**
+* **Application elements**
+* **Application text content**
+* **Application images**
