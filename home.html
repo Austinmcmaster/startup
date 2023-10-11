@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>User Data Page</title>
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
     <header>
         <h1>
         <img alt = "Time Logo" src = "https://th.bing.com/th/id/OIP.MHagr3f1A3MJIfcZjw4Z2gHaHa?pid=ImgDet&rs=1" width="50px"/>
@@ -23,11 +23,21 @@
                     <a href="UserData.html">Data Page</a>
                 </div>
             </menu>
+
         </nav>
     </header>
     </hr>
+
     <main>
-        <h4>All Data connected with user for a given database</h4>
+
+        <form method="get" >
+            <label>Leaderboard</label>
+            <div></div>
+            <input placeholder="Leaderboard data will display here in this box." >
+        </form>
+
+
+        <h4>Subjects Data Imported from Database</h4>
         <table>
             <tr>
                 <th>Subject</th>
@@ -54,12 +64,8 @@
                 <th>Description</th>
                 <th>1:00</th>
             </tr>
-
         </table>
-        <button>Delete</button>
-        <button>Modify</button>
 
-        <div></div>
         <form method ="post" action = "">
             <label for="Subect">Subject</label>
             <div></div>
@@ -76,12 +82,25 @@
             <input type="text" id = "sub_descript", placeholder="Enter a description">
             <div></div>
             <button type="submit">Submit</button>
-            </form>
+        </form>
+        <label>Pie Chart data that will made using Database data, along with JavaScript</label>
+        <div></div>
+        <img src="https://i.stack.imgur.com/YFjNz.jpg" alt = "Pie Chart" width="400">
+
+
+        <form method="post">
+            <label>Web Chat</label>
+            <div></div>
+            <input type="text" id="webchat"/>
+        </form>
+
     </main>
     <footer>
         <div>
-            <p>Author: Austin McMaster</p>
-            <a href="https://github.com/Austinmcmaster/startup"> GitHub Repository</a>
+        <p>Author: Austin McMaster</p>
+        <a href="https://github.com/Austinmcmaster/startup"> GitHub Repository</a>
         </div>
     </footer>
+    
 </body>
+</html>
