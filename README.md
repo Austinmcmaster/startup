@@ -47,7 +47,7 @@ For this deliverable I built out the structure of my application using HTML.
 
 For this deliverable I properly styled the application into its final appearence though it may be changed as furthur functioanlity is added. For
 exmaple the pie chart currently is just a css pie chart where as it will eventually be a caluclation later. I also added a sign up page for login 
-capabilities just so a user can be added to a database. Stylying has been refined but, small changes may come.
+capabilities just so a user can be added to a database. Stylying has been refined but, small changes may come. Its resizing will come with javascript in the future.
 
 * **Header, footer and main content body**- Properly styled
 * **Navigation elements**- They appear inside the header and have a hover animation. Spacing looks good.

@@ -215,6 +215,7 @@ button {
 }
 .webchat textarea{
     margin: 5px;
+    margin-bottom: 50px;
     background-color: transparent;
     border-color: #34495e;
     color: azure;
