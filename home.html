@@ -4,40 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    <link rel="stylesheet" href="home.css">
 </head>
 <body>
-    <header>
+    <header class="header">
         <h1>
-        <img alt = "Time Logo" src = "https://th.bing.com/th/id/OIP.MHagr3f1A3MJIfcZjw4Z2gHaHa?pid=ImgDet&rs=1" width="50px"/>
+        <img alt = "Time Logo" src = "https://www.freepngimg.com/thumb/clock/11-2-clock-free-png-image.png" width="50px"/>
         Time Analytics</h1>
-        <div><h2>Welcome User</h2></div>
-        <nav>
-            <menu>
-                <div>
-                    <a href="home.html"> Home Page</a>
-                </div>
-                <div>
-                    <a href="index.html"> Login Page</a>
-                
-                <div>
-                    <a href="UserData.html">Data Page</a>
-                </div>
-            </menu>
-
-        </nav>
+        <ul class="main-nav">
+            <li><a href="home.html"> Home Page</a></li>
+            <li><a href="index.html"> Login Page</a></li>
+            <li><a href="UserData.html">Data Page</a></li>
+        </ul>
     </header>
     </hr>
-
-    <main>
-
-        <form method="get" >
-            <label>Leaderboard</label>
-            <div></div>
-            <input placeholder="Leaderboard data will display here in this box." >
-        </form>
-
-
-        <h4>Subjects Data Imported from Database</h4>
+        <div class="Leaderboard">
+            <p>Leaderboard</p>
+        </div>
         <table>
             <tr>
                 <th>Subject</th>
@@ -94,7 +77,6 @@
             <input type="text" id="webchat"/>
         </form>
 
-    </main>
     <footer>
         <div>
         <p>Author: Austin McMaster</p>

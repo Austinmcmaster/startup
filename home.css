@@ -1,0 +1,140 @@
+
+* {
+	box-sizing: border-box;
+}
+body {
+    margin:0;
+    padding:0;
+    font-family: sans-serif;
+    background: linear-gradient(#141e30, #243b55);
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+
+h2,
+h3,
+a {
+	color: #34495e;
+}
+
+a {
+	text-decoration: none;
+}
+
+.main-nav {
+	margin-top: 5px;
+
+}
+
+.main-nav a {
+	padding: 10px 15px;
+	text-transform: uppercase;
+	text-align: center;
+	display: block;
+}
+
+.main-nav a {
+	color: #34495e;
+	font-size: .99em;
+}
+
+.main-nav a:hover {
+	color: #718daa;
+}
+
+
+
+.header {
+    color: azure;
+    display: flex;
+	padding-top: .5em;
+	padding-bottom: .5em;
+    padding-left: .5em;
+	border: 0.5px solid #243b55;
+	background-color: #141e30;
+	-webkit-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.Leaderboard {
+    width: 300px;
+    height: 300px;
+    border: 1px solid #34495e;
+    background-color: transparent;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    margin: 20px;
+    display: flex;
+    float: right;
+    border-style:ridge;
+    
+}
+.Leaderboard p {
+    display: flex;
+    float: left;
+    color: #34495e;
+    width: 100%;
+    height: fit-content;
+    
+}
+table {
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
+    color: #34495e
+}
+th,td {
+    border-bottom: 1px solid;
+    
+}
+
+
+tr:hover {background-color: #718daa}
+
+
+/* ================================= 
+  Media Queries
+==================================== */
+
+
+
+
+@media (min-width: 769px) {
+	.header,
+	.main-nav {
+		display: flex;
+	}
+	.header {
+		flex-direction: column;
+		align-items: center;
+    	.header{
+		width: 80%;
+		margin: 0 auto;
+		max-width: 1150px;
+	}
+	}
+
+}
+
+@media (min-width: 1025px) {
+	.header {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+}
+
+
