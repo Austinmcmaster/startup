@@ -48,24 +48,20 @@
                 <th>1:00</th>
             </tr>
         </table>
-
-        <form method ="post" action = "">
-            <label for="Subect">Subject</label>
-            <div></div>
-            <input type="text"id = "Subject" required = "text" placeholder="Enter a description for text."/>
-            <div></div>
-            <label for="Time_in">Time In</label>
-            <div></div>
-            <input type="time" id = "Time_in" required="time" placeholder="Enter Time in">
-            <div></div>
-            <label for="Time_out">Time Out</label>
-            <div></div>
-            <input type="time" id = "Time_out" required="time" placeholder="Enter Time out">
-            <div></div>
-            <input type="text" id = "sub_descript", placeholder="Enter a description">
-            <div></div>
-            <button type="submit">Submit</button>
-        </form>
+        <div class="container">
+            <form method ="post" action = "">
+                <h2>Time Entry</h2>
+                <label for="Subect">Subject</label>
+                <input type="text"id = "Subject" required = "text" placeholder="Enter a associated subject"/>
+                <label for="Time_in">Time In</label>
+                <input type="time" id = "Time_in" required="time" placeholder="Enter Time in">
+                <label for="Time_out">Time Out</label>
+                <input type="time" id = "Time_out" required="time" placeholder="Enter Time out">
+                <label for="sub_descript">Description</label>
+                <textarea name = "Description" id="descriptionbox" title="Description_Box" placeholder="Enter Description here." cols="30" rows="5"></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
         <label>Pie Chart data that will made using Database data, along with JavaScript</label>
         <div></div>
         <img src="https://i.stack.imgur.com/YFjNz.jpg" alt = "Pie Chart" width="400">
