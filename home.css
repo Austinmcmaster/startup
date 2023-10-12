@@ -109,6 +109,8 @@ tr:hover {background-color: #718daa}
 .container {
     padding: 5px;
     margin: 5px;
+    width: min-content;
+    display: flex;
     
 }
 
@@ -169,7 +171,7 @@ label {
     color: azure;
 }
   
-.button {
+button {
   font-weight: 600;
   text-align: center;
   font-size: 15px;
@@ -185,6 +187,42 @@ label {
   overflow: hidden;
   transition: all 200ms ease-in-out;
   box-shadow: 0px 2px 6px rgba(0,0,0,0.3);
+}
+
+
+
+.piechart {
+        display: flex;
+        margin-top: 40px;
+        margin-left: 300px;
+        width: 300px; 
+        height: 300px; 
+        border-radius: 50%; 
+        background-image: conic-gradient( 
+            pink 70deg,  
+            lightblue 0 235deg,  
+            orange 0); 
+        float: right;
+}
+.piechart h2 {
+    display: flex;
+}
+
+.weblabel label{
+    color: #34495e;
+}
+.webchat textarea{
+    background-color: transparent;
+    border-color: #34495e;
+}
+
+
+footer {
+    color: azure;
+}
+
+footer a {
+    color: azure;
 }
 
 
