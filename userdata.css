@@ -173,6 +173,8 @@ input textarea {
 label {
     color: azure;
 }
+
+
   
 button {
   font-weight: 600;
@@ -190,6 +192,11 @@ button {
   overflow: hidden;
   transition: all 200ms ease-in-out;
   box-shadow: 0px 2px 6px rgba(0,0,0,0.3);
+}
+
+.table button {
+    margin-left: 10px;
+    width: fit-content;
 }
 
 footer {
