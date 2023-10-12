@@ -201,12 +201,5 @@ button {
 }
 
 footer {
-    position: absolute;
-    bottom: 0;
     color: azure;
-}
-
-footer a {
-    color: azure;
-    text-decoration: underline;
 }
