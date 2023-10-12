@@ -210,13 +210,14 @@ button {
 }
 
 .weblabel label{
-    color: azure;
+    color: #34495e;
     margin-left: 5px;
 }
 .webchat textarea{
     margin: 5px;
     background-color: transparent;
     border-color: #34495e;
+    color: azure;
 }
 
 
