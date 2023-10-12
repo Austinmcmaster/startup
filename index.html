@@ -3,29 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="main.css">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="home.css">
 </head>
 <body>
-    <header>
+    <header class="header">
         <h1>
         <img alt = "Time Logo" src = "https://www.freepngimg.com/thumb/clock/11-2-clock-free-png-image.png" width="50px"/>
         Time Analytics</h1>
+        <ul class="main-nav">
+            <li><a>Username</a></li>
+            <li><a href="index.html"> Home Page</a></li>
+            <li><a href="login.html"> Login Page</a></li>
+            <li><a href="UserData.html">Data Page</a></li>
+        </ul>
     </header>
+        <div class="Leaderboard">
+            <p>Leaderboard</p>
+        </div>
+        <table>
+            <tr>
+                <th>Subject</th>
+                <th>Description</th>
+                <th>Time</th>
+            </tr>
+            <tr>
+                <th>Homework</th>
+                <th>Allotted time for homework for BYU Classes</th>
+                <th>8:00</th>
+            </tr>
+            <tr>
+                <th>Shopping</th>
+                <th>Weekly shopping for the necessities</th>
+                <th>2:00</th>
+            </tr>
+            <tr>
+                <th>Hobbies</th>
+                <th>Video Games, motor cycle riding</th>
+                <th>6:00</th>
+            </tr>
+            <tr>
+                <th>Subject</th>
+                <th>Description</th>
+                <th>1:00</th>
+            </tr>
+        </table>
+        <div class="container">
+            <form method ="post" action = "">
+                <h2>Time Entry</h2>
+                <label for="Subect">Subject</label>
+                <input type="text"id = "Subject" required = "text" placeholder="Enter a associated subject"/>
+                <label for="Time_in">Time In</label>
+                <input type="time" id = "Time_in" required="time" placeholder="Enter Time in">
+                <label for="Time_out">Time Out</label>
+                <input type="time" id = "Time_out" required="time" placeholder="Enter Time out">
+                <label for="sub_descript">Description</label>
+                <textarea name = "Description" id="descriptionbox" title="Description_Box" placeholder="Enter Description here." cols="30" rows="5"></textarea>
+                <button type="submit">Submit</button>
+            </form>
 
-
-    <div class="container">
-
-        <form>
-            <h2>Login</h2>
-                <div class="form-content">
-                    <input type="email"id = "email" required = "email" placeholder="Email"/>
-                    <input type="password" id = "password" required="password" placeholder="Password">
-                    <a href="signup.html">Sign Up</a>
-                    <br><button class="button" type="submit">Login</button><br>
+            <div class="pieContainer">
+                <h2>Pie Chart</h2>
+                <div class="piechart">
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+
+
+        <div class="weblabel">
+        <label for="webchat">Web Chat</label>
+        </div>
+        <div class="webchat">
+            <textarea type="text" id="webchat"title="Description_Box" cols="50" rows="8"></textarea>
+        </div>
+
+
+    <footer>
+        <div>
+        <p>Author: Austin McMaster</p>
+        <a href="https://github.com/Austinmcmaster/startup"> GitHub Repository</a>
+        </div>
+    </footer>
+    
 </body>
 </html>

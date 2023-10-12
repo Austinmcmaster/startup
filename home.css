@@ -227,6 +227,7 @@ footer {
 
 footer a {
     color: azure;
+    text-decoration: underline;
 }
 
 
