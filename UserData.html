@@ -4,30 +4,21 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>User Data Page</title>
+        <link rel="stylesheet" href="userdata.css">
     </head>
     <body>
-    <header>
-        <h1>
-        <img alt = "Time Logo" src = "https://th.bing.com/th/id/OIP.MHagr3f1A3MJIfcZjw4Z2gHaHa?pid=ImgDet&rs=1" width="50px"/>
-        Time Analytics</h1>
-        <div><h2>Welcome User</h2></div>
-        <nav>
-            <menu>
-                <div>
-                    <a href="home.html"> Home Page</a>
-                </div>
-                <div>
-                    <a href="index.html"> Login Page</a>
-                
-                <div>
-                    <a href="UserData.html">Data Page</a>
-                </div>
-            </menu>
-        </nav>
+    <header class="header">
+            <h1>
+            <img alt = "Time Logo" src = "https://www.freepngimg.com/thumb/clock/11-2-clock-free-png-image.png" width="50px"/>
+            Time Analytics</h1>
+            <ul class="main-nav">
+                <li><a>Username</a></li>
+                <li><a href="home.html"> Home Page</a></li>
+                <li><a href="index.html"> Login Page</a></li>
+                <li><a href="UserData.html">Data Page</a></li>
+            </ul>
     </header>
-    </hr>
-    <main>
-        <h4>All Data connected with user for a given database</h4>
+    
         <table>
             <tr>
                 <th>Subject</th>
@@ -56,8 +47,10 @@
             </tr>
 
         </table>
+        <div class="table button">
         <button>Delete</button>
         <button>Modify</button>
+        </div>
 
         <div></div>
         <form method ="post" action = "">
@@ -77,7 +70,6 @@
             <div></div>
             <button type="submit">Submit</button>
             </form>
-    </main>
     <footer>
         <div>
             <p>Author: Austin McMaster</p>
