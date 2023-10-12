@@ -1,6 +1,7 @@
 * {
 	box-sizing: border-box;
 }
+html { height: 100%;}
 body {
     margin:0;
     padding:0;
@@ -200,6 +201,8 @@ button {
 }
 
 footer {
+    position: absolute;
+    bottom: 0;
     color: azure;
 }
 
