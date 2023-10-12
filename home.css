@@ -189,12 +189,15 @@ button {
   box-shadow: 0px 2px 6px rgba(0,0,0,0.3);
 }
 
-
+.pieContainer h2 {
+    margin-left: 250px;
+    margin-top: 20px;
+}
 
 .piechart {
         display: flex;
         margin-top: 40px;
-        margin-left: 300px;
+        margin-left: 250px;
         width: 300px; 
         height: 300px; 
         border-radius: 50%; 
@@ -203,9 +206,6 @@ button {
             lightblue 0 235deg,  
             orange 0); 
         float: right;
-}
-.piechart h2 {
-    display: flex;
 }
 
 .weblabel label{
