@@ -46,12 +46,12 @@ For this deliverable I built out the structure of my application using HTML.
 ## CSS deliverable
 
 For this deliverable I properly styled the application into its final appearence though it may be changed as furthur functioanlity is added. For
-exmaple the pie chart currently is just a css pie chart where as it will be a caluclation later. I also added a sign up page for login 
-capabilities just so a user can be added to a furthur database. Stylying has been refined but, small changes may come.
+exmaple the pie chart currently is just a css pie chart where as it will eventually be a caluclation later. I also added a sign up page for login 
+capabilities just so a user can be added to a database. Stylying has been refined but, small changes may come.
 
 * **Header, footer and main content body**- Properly styled
 * **Navigation elements**- They appear inside the header and have a hover animation. Spacing looks good.
 * **Responsive to window resizing**- My pages resize and collapse elements. The pie chart is the only thing that does not collapse since it has a definite size
 * **Application elements**- Gradient color, use of float and div tags allow elements to be next to each other and all elements desired for project are present. Contrast is present along with some gradient coloring.
-* **Application text content**- consistent font with use of two colors. May be changed based off my preferences
-* **Application images**- Logo is properly styled and in the header. Pie chart is also made with css and it looks pretty cool
+* **Application text content**- consistent font with use of two colors. May be changed based off my preferences, consistent font used
+* **Application images**- Logo is properly styled and in the header. Pie chart is also made with css and it looks pretty cool. Only images applicable.
