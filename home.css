@@ -232,6 +232,9 @@ footer {
 	-moz-border-radius: 5px;
 	border-radius: 5px;
     display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 footer p {
