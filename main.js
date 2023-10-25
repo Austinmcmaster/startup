@@ -2,7 +2,7 @@ class TimeAnalytic {
 
     constructor(){
     const username = document.querySelector('.username_a');
-    username.textContent= localStorage.getItem('username') ?? 'Unknown';
+    username.textContent= getUserName();
     
     }
 
