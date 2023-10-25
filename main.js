@@ -2,7 +2,7 @@ class TimeAnalytic {
 
     constructor(){
     const username = document.querySelector('.username_a');
-    username.textContent= getUserName();
+    username.textContent= this.getUserName();
     
     }
 
