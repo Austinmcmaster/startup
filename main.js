@@ -46,19 +46,21 @@ function fillTable(){
 }
 
 function loadTable() {
-    const data = JSON.parse(localStorage.getItem('table'));
-    console.log(data);
-    var table = document.getElementById('DataTable');
+    if(localStorage.getItem('table') != null){
+        const data = JSON.parse(localStorage.getItem('table'));
+        console.log(data);
+        var table = document.getElementById('DataTable');
 
 
-    for(i = 0; i < data.length; i++){
-        var row = table.insertRow(i+1);
-        var cell_1 = row.insertCell(0);
-        var cell_2 = row.insertCell(1);
-        var cell_3 = row.insertCell(2);
-        cell_1.innerHTML = data[i].Subject;
-        cell_2.innerHTML = data[i].Description;
-        cell_3.innerHTML = data[i].Time;
-    }
+        for(i = 0; i < data.length; i++){
+            var row = table.insertRow(i+1);
+            var cell_1 = row.insertCell(0);
+            var cell_2 = row.insertCell(1);
+            var cell_3 = row.insertCell(2);
+            cell_1.innerHTML = data[i].Subject;
+            cell_2.innerHTML = data[i].Description;
+            cell_3.innerHTML = data[i].Time;
+        }
+    }   
 }
 
