@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Page</title>
     <link rel="stylesheet" href="login.css">
-    <script src="signup.js"></script>
 </head>
 <body>
     <header>
@@ -17,17 +16,19 @@
 
     <div class="container">
 
-        <form>
+        <form id = "register_form">
             <h2>Register</h2>
                 <div class="form-content">
                     <input type="text" id="username" required = "text" placeholder="Username"/>
                     <input type="email"id = "email" required = "email" placeholder="Email"/>
                     <input type="password" id = "password" required="password" placeholder="Password">
                     <a href="login.html">Return to login</a>
-                    <br><button class="button" onclick="signup()">Register</button><br>
+                    <br><button class="button" type="submit">Register</button><br>
                 </div>
             </div>
         </form>
     </div>
+<script src="signup.js"></script>
 </body>
+
 </html>
