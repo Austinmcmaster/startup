@@ -22,31 +22,11 @@
         <div class="Leaderboard">
             <p>Leaderboard</p>
         </div>
-        <table>
+        <table id="DataTable">
             <tr>
                 <th>Subject</th>
                 <th>Description</th>
-                <th>Time</th>
-            </tr>
-            <tr>
-                <th>Homework</th>
-                <th>Allotted time for homework for BYU Classes</th>
-                <th>8:00</th>
-            </tr>
-            <tr>
-                <th>Shopping</th>
-                <th>Weekly shopping for the necessities</th>
-                <th>2:00</th>
-            </tr>
-            <tr>
-                <th>Hobbies</th>
-                <th>Video Games, motor cycle riding</th>
-                <th>6:00</th>
-            </tr>
-            <tr>
-                <th>Subject</th>
-                <th>Description</th>
-                <th>1:00</th>
+                <th>Time (Minutes)</th>
             </tr>
         </table>
         <div class="container">
@@ -60,7 +40,7 @@
                 <input type="time" id = "Time_out" required="time" placeholder="Enter Time out">
                 <label for="sub_descript">Description</label>
                 <textarea name = "Description" id="descriptionbox" title="Description_Box" placeholder="Enter Description here." cols="30" rows="5"></textarea>
-                <button type="submit">Submit</button>
+                <button class = "entry_button" onclick = "fillTable()">Submit</button>
             </form>
 
             <div class="pieContainer">
