@@ -55,3 +55,12 @@ capabilities just so a user can be added to a database. Stylying has been refine
 * **Application elements**- Gradient color, use of float and div tags allow elements to be next to each other and all elements desired for project are present. Contrast is present along with some gradient coloring.
 * **Application text content**- consistent font with use of two colors. May be changed based off my preferences, consistent font used
 * **Application images**- Logo is properly styled and in the header. Pie chart is also made with css and it looks pretty cool. Only images applicable.
+
+## JavaScript deliverable
+
+For this deliverable I implemented by JavaScript so that the application works for a single user. I also added placeholders for future technology.
+
+* **Login**-
+* **Database**-
+* **WebSocket**-
+* **Application Logic**-
