@@ -12,7 +12,7 @@
             <img alt = "Time Logo" src = "https://www.freepngimg.com/thumb/clock/11-2-clock-free-png-image.png" width="50px"/>
             Time Analytics</h1>
             <ul class="main-nav">
-                <li><a>Username</a></li>
+                <li><a id="user_name"></a></li>
                 <li><a href="index.html"> Home Page</a></li>
                 <li><a href="login.html"> Login Page</a></li>
                 <li><a href="UserData.html">Data Page</a></li>
@@ -23,11 +23,11 @@
             <tr>
                 <th>Subject</th>
                 <th>Description</th>
-                <th>Time</th>
+                <th>Time (Hours)</th>
             </tr>
         </table>
         <div class="table button">
-        <button>Delete</button>
+        <button onclick="clearTable()">Clear Data</button>
         <button>Modify</button>
         </div>
 
@@ -40,11 +40,13 @@
             <label for="Time_out">Time Out</label>
             <input type="time" id = "Time_out" required="time" placeholder="Enter Time out">
             <textarea name = "Description" id="descriptionbox" title="Description_Box" placeholder="Enter Description here." cols="30" rows="5"></textarea>
-            <button type="submit">Submit</button>
+            <button type="submit" onclick="fillTable()">Submit</button>
             </form>
     <footer>
         <div>
             <p>Author: Austin McMaster</p>
         </div>
     </footer>
+    <script src="userdata.js"></script>
 </body>
+</html>

@@ -22,13 +22,14 @@ function fillTable(){
     var time2 = getminutes(document.getElementById("Time_in").value);
 
     var res = Math.abs(time1 - time2);
+    var hours = res / 60;
 
     const description = document.querySelector("#descriptionbox");
 
     let tableObject = {
         Subject : subject.value,
         Description: description.value,
-        Time: res
+        Time: hours
     };
 
     if(localStorage.getItem('table') == null){
