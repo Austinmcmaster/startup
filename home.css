@@ -215,10 +215,28 @@ button {
 }
 .webchat textarea{
     margin: 5px;
-    margin-bottom: 50px;
     background-color: transparent;
     border-color: #34495e;
     color: azure;
+}
+.webchat input {
+    margin: 5px;
+    background-color:transparent;
+    color: azure;
+    border: #34495e;
+    width: 375px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.webchat button {
+
+    margin-bottom: 50px;
+    background-color: #141e30;
+    margin-left: 5px;
+    text-align: center;
+    width: auto;
+    font-size: 12px;
 }
 
 
