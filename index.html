@@ -30,7 +30,7 @@
             </tr>
         </table>
         <div class="container">
-            <form method ="post" action = "">
+            <form id="time_form">
                 <h2>Time Entry</h2>
                 <label for="Subect">Subject</label>
                 <input type="text"id = "Subject" required = "text" placeholder="Enter a associated subject"/>
@@ -40,7 +40,7 @@
                 <input type="time" id = "Time_out" required="time" placeholder="Enter Time out">
                 <label for="sub_descript">Description</label>
                 <textarea name = "Description" id="descriptionbox" title="Description_Box" placeholder="Enter Description here." cols="30" rows="5"></textarea>
-                <button class = "entry_button" onclick = "fillTable()">Submit</button>
+                <button class = "entry_button" type="submit">Submit</button>
             </form>
 
             <div class="pieContainer">
