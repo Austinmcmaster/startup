@@ -19,34 +19,12 @@
                 <li><a href="https://github.com/Austinmcmaster/startup">GitHub Repository</a></li>
             </ul>
     </header>
-    
-        <table>
+        <table id = "DataTable">
             <tr>
                 <th>Subject</th>
                 <th>Description</th>
                 <th>Time</th>
             </tr>
-            <tr>
-                <th>Homework</th>
-                <th>Allotted time for homework for BYU Classes</th>
-                <th>8:00</th>
-            </tr>
-            <tr>
-                <th>Shopping</th>
-                <th>Weekly shopping for the necessities</th>
-                <th>2:00</th>
-            </tr>
-            <tr>
-                <th>Hobbies</th>
-                <th>Video Games, motor cycle riding</th>
-                <th>6:00</th>
-            </tr>
-            <tr>
-                <th>Subject</th>
-                <th>Description</th>
-                <th>1:00</th>
-            </tr>
-
         </table>
         <div class="table button">
         <button>Delete</button>
@@ -56,19 +34,12 @@
         <div></div>
         <form method ="post" action = "">
             <label for="Subect">Subject</label>
-            <div></div>
             <input type="text"id = "Subject" required = "text" placeholder="Enter a description for text."/>
-            <div></div>
             <label for="Time_in">Time In</label>
-            <div></div>
             <input type="time" id = "Time_in" required="time" placeholder="Enter Time in">
-            <div></div>
             <label for="Time_out">Time Out</label>
-            <div></div>
             <input type="time" id = "Time_out" required="time" placeholder="Enter Time out">
-            <div></div>
-            <input type="text" id = "sub_descript", placeholder="Enter a description">
-            <div></div>
+            <textarea name = "Description" id="descriptionbox" title="Description_Box" placeholder="Enter Description here." cols="30" rows="5"></textarea>
             <button type="submit">Submit</button>
             </form>
     <footer>
