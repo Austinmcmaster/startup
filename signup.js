@@ -5,7 +5,7 @@ function signup() {
 }
 
 const registration_form = document.getElementById("register_form");
-registration_form.addEventListener("submit", checkValidity)
+registration_form.addEventListener("submit", checkValidity);
 
 function checkValidity(event){
     if(registration_form.checkValidity()){
