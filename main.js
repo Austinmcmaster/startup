@@ -27,12 +27,13 @@ function checkValidity(event){
 
 function fillTable(){
     const subject = document.querySelector("#Subject");
-    const getminutes = s => s.split(":").reduce((acc, curr) => acc * 60 + +curr, 0);
-    var time1 = getminutes(document.getElementById("Time_out").value);
-    var time2 = getminutes(document.getElementById("Time_in").value);
+    const getSeconds = s => s.split(":").reduce((acc, curr) => acc * 60 + +curr, 0)
+    var end = getSeconds(document.getElementById("Time_out").value);
+    var start = getSeconds(document.getElementById("Time_in").value);
 
-    var res = Math.abs(time1 - time2);
-    var hours = res / 60;
+    var res = Math.abs(end - start);
+    var hours = (res / 60);
+
 
     const description = document.querySelector("#descriptionbox");
 

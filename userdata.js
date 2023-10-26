@@ -15,6 +15,16 @@ class TimeAnalytic {
 
 const timeAnalytic = new TimeAnalytic();
 
+
+const time_form = document.getElementById("time_form");
+time_form.addEventListener("submit", checkValidity);
+
+function checkValidity(event){
+    if(time_form.checkValidity()){
+        fillTable();
+    }
+}
+
 function fillTable(){
     const subject = document.querySelector("#Subject");
     const getminutes = s => s.split(":").reduce((acc, curr) => acc * 60 + +curr, 0);
