@@ -81,12 +81,16 @@ textarea.value = "";
 const web_button = document.getElementById("web_button");
 const web_input = document.getElementById("web_message");
 
+
 web_button.addEventListener('click', function handleClick(){
-    user = localStorage.getItem('username') ?? "Unknown User"
-    usuer = user.trim();
-    textarea.value += user;
-    textarea.value += ": " + web_input.value;
-    textarea.value += "\n";
+
+    if(web_input.checkValidity()){
+        user = localStorage.getItem('username') ?? "Unknown User"
+        usuer = user.trim();
+        textarea.value += user;
+        textarea.value += ": " + web_input.value;
+        textarea.value += "\n";
+    }
 
 });
 
