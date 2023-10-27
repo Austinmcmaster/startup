@@ -79,6 +79,8 @@ table#leaderboard {
 
 #leaderboard tr{
     width: min-content;
+    text-align: center;
+
 }
 #leaderboard th{
     width: min-content;
