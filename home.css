@@ -64,8 +64,8 @@ a {
 	border-radius: 5px;
 }
 
-.Leaderboard {
-    width: 300px;
+table#leaderboard {
+    width: fit-content;
     height: 300px;
     border: 1px solid #34495e;
     background-color: transparent;
@@ -73,26 +73,24 @@ a {
     padding-right: 5px;
     padding-bottom: 5px;
     margin: 20px;
-    display: flex;
     float: right;
     border-style:ridge;
-    
 }
-.Leaderboard p {
-    display: flex;
-    float: left;
-    color: #34495e;
-    width: 100%;
-    height: fit-content;
-    
+
+#leaderboard tr{
+    width: min-content;
 }
+#leaderboard th{
+    width: min-content;
+    padding-left: 27px;
+    padding-right: 27px;
+}
+
 table {
     padding: 10px;
     margin: 10px;
     display: flex;
     width: fit-content;
-    justify-content: center;
-    align-items: center;
     border: 1px solid;
     color: #34495e
 }

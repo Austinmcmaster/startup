@@ -5,6 +5,7 @@ class TimeAnalytic {
     username.textContent= this.getUserName();
     loadTable();
     loadUsers();
+    setLeaderboardView();
     
     }
 
@@ -33,7 +34,7 @@ function fillTable(){
     var start = getSeconds(document.getElementById("Time_in").value);
 
     var res = Math.abs(end - start);
-    var hours = (res / 60);
+    var hours = Math.round(res / 60);
 
 
     const description = document.querySelector("#descriptionbox");
@@ -106,10 +107,39 @@ web_button.addEventListener('click', function handleClick(){
         textarea.value += "\n";
         web_input.value = "";
 
-        web_input.reset();
     }
 
 });
+
+function getUser(){
+    return localStorage.getItem('username') ?? "Unknown User"
+}
+
+
+function setLeaderboardView(){
+    const leaderboard = document.getElementById("leaderboard");
+
+    let elements = [];
+
+    if(localStorage.getItem('table') != null){
+        const data = JSON.parse(localStorage.getItem('table'));
+
+        let topscore = 0;
+        for(i = 0; i < data.length; i++){
+            if(topscore < data[i].Time){
+                topscore = i;
+            }
+        }
+
+        var row = leaderboard.insertRow(1);
+        var cell_1 = row.insertCell(0);
+        var cell_2 = row.insertCell(1);
+        var cell_3 = row.insertCell(2);
+        cell_1.innerHTML = 1
+        cell_2.innerHTML = getUser();
+        cell_3.innerHTML = data[topscore].Time;
+    }
+}
 
 
 
