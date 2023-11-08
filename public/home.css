@@ -195,7 +195,7 @@ button {
     margin-top: 20px;
 }
 
-.piechart {
+#piechart {
         display: flex;
         margin-top: 40px;
         margin-left: 250px;

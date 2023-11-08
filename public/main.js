@@ -1,3 +1,16 @@
+function displayQuote(data){
+    fetch('https://catfact.ninja/fact')
+    .then((response) => response.json())
+    .then((data) => {
+        const textarea = document.getElementById("webchat");
+        textarea.value += "Cat Quote:\n"
+        textarea.value += data.fact
+        textarea.value += '\n\n'
+    })
+
+}
+
+
 class TimeAnalytic {
 
     constructor(){
@@ -6,7 +19,6 @@ class TimeAnalytic {
     loadTable();
     loadUsers();
     setLeaderboardView();
-    
     }
 
 
@@ -85,7 +97,11 @@ const web_input = document.getElementById("web_message");
 function loadUsers(){
     const textarea = document.getElementById("webchat");
     textarea.value = "";
-    textarea.value += "Chris: Connected\n";
+    displayQuote();
+
+    setTimeout(() => {
+        textarea.value += "Chris: Connected\n";
+    }, 2000);
 
     setTimeout(() => {
         textarea.value += "User1: Connected\n";
