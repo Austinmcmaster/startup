@@ -4,9 +4,9 @@ async function signup() {
     const email = document.querySelector("#email");
 
     let userObject = {
-        username : username.value,
-        password : password.value,
-        email : email.value,
+        username : username.value.toUpperCase(),
+        password : password.value.toUpperCase(),
+        email : email.value.toUpperCase(),
         UserID: crypto.randomUUID(),
     }
 

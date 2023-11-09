@@ -65,6 +65,7 @@ async function fillTable(){
 
 
 function displayQuote(data){
+    try{
     fetch('https://catfact.ninja/fact')
     .then((response) => response.json())
     .then((data) => {
@@ -73,6 +74,9 @@ function displayQuote(data){
         textarea.value += data.fact
         textarea.value += '\n\n'
     })
+    }catch{
+        console.log("Unable to Load Cat Quote/ Fetch Data");
+    }
 
 }
 

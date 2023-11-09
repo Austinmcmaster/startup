@@ -5,24 +5,31 @@ function checkValidity(event){
     if(login_form.checkValidity()){
         event.preventDefault();
         login();
-
     }
     
 }
 
-function login(){
-    // Eventually we will authenticate the email and password which
-    // then will return the username that we can store in local storage along with that users data.
+async function login(){
     
     const email = document.getElementById("email");
     const password = document.getElementById("password");
 
+    
+    try{
+        const response = await fetch('api/user');
+        var users = await response.json();
+        for(i = 0; i < users.length; i ++){
+            var data = users[i];
+            if((email.value.toUpperCase() === data.email) & 
+            (password.value.toUpperCase() === data.password)){
+                localStorage.setItem('userObject', JSON.stringify(data));
+                window.location.href = "index.html";
+                break;
+            }
+        }
+        console.log("Unknown Email or Password");
 
-    let userObject = {
-        Email: email.value,
-        Password: password.value, 
-    };
-    localStorage.setItem('USER', JSON.stringify(userObject));
-    console.log(JSON.parse(localStorage.getItem('USER')));
-    window.location.href = "index.html";
+    }catch {
+        console.log("Server Error in fetching User Data");
+    }
 }
