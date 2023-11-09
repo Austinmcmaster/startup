@@ -39,35 +39,36 @@ function checkValidity(event){
     }
 }
 
-function fillTable(){
+async function fillTable(){
     const subject = document.querySelector("#Subject");
-    const getminutes = s => s.split(":").reduce((acc, curr) => acc * 60 + +curr, 0);
-    var time1 = getminutes(document.getElementById("Time_out").value);
-    var time2 = getminutes(document.getElementById("Time_in").value);
+    const getSeconds = s => s.split(":").reduce((acc, curr) => acc * 60 + +curr, 0)
+    var end = getSeconds(document.getElementById("Time_out").value);
+    var start = getSeconds(document.getElementById("Time_in").value);
 
-    var res = Math.abs(time1 - time2);
-    var hours = res / 60;
+    var res = Math.abs(end - start);
+    var hours = Math.round(res / 60);
+
 
     const description = document.querySelector("#descriptionbox");
 
     let tableObject = {
         Subject : subject.value,
         Description: description.value,
-        Time: hours
+        Time: hours,
+        UserID: 3, // Add in ID connected to objects
+        entryID: crypto.randomUUID(),
     };
 
-    if(localStorage.getItem('table') == null){
-        let myArray = [];
-        myArray.push(tableObject);
-        localStorage.setItem('table', JSON.stringify(myArray));
-        console.log(JSON.parse(localStorage.getItem('table')));
-    }
-    else {
-        let array = JSON.parse(localStorage.getItem('table'));
-        array.push(tableObject);
-        localStorage.setItem('table', JSON.stringify(array));
-        console.log(JSON.parse(localStorage.getItem('table')));
-    }
+    fetch('api/table', {
+    method: 'POST',
+    body: JSON.stringify(tableObject),
+    headers: {
+    'Content-type': 'application/json; charset=UTF-8',},
+    })
+    .then((response) => response.json())
+    .then((jsonResponse) => {
+    console.log(jsonResponse);
+    });
 }
 
 function loadTableData(data) {

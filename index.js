@@ -30,7 +30,6 @@ apiRouter.post('/table', (req,res) =>{
     res.send(entries);
 });
 
-
 app.use((_req, res) => {
     res.sendFile("index.html", {root: 'public'});
 });
