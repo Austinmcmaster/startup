@@ -84,10 +84,16 @@ class TimeAnalytic {
     username.textContent= this.getUserName();
     loadUsers();
     }
-
-
     getUserName() {
-        return localStorage.getItem('username') ?? "Unknown User";
+        const userObject = localStorage.getItem('userObject');
+        var data = JSON.parse(userObject);
+        if(userObject == null){
+            return "Unknown User"
+        }
+        else{
+            return data.username;
+        }
+        
     }
 }
 
@@ -154,10 +160,6 @@ web_button.addEventListener('click', function handleClick(){
     }
 
 });
-
-function getUser(){
-    return localStorage.getItem('username') ?? "Unknown User"
-}
 
 
 function setLeaderboardView(times){

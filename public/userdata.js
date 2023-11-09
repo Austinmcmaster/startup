@@ -23,7 +23,15 @@ class TimeAnalytic {
 
 
     getUserName() {
-        return localStorage.getItem('username') ?? "Unknown User";
+        const userObject = localStorage.getItem('userObject');
+        var data = JSON.parse(userObject);
+        if(userObject == null){
+            return "Unknown User"
+        }
+        else{
+            return data.username;
+        }
+        
     }
 }
 

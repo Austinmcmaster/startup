@@ -30,6 +30,16 @@ apiRouter.post('/table', (req,res) =>{
     res.send(entries);
 });
 
+apiRouter.get('/user', (_req,res) => {
+    res.send(users);
+});
+
+apiRouter.post('/user', (req,res) => {
+    users = updateUsers(req.body, users);
+    res.send(users);
+})
+
+
 app.use((_req, res) => {
     res.sendFile("index.html", {root: 'public'});
 });
@@ -37,6 +47,12 @@ app.use((_req, res) => {
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
+
+let users = []
+function updateUsers(newUser, users){
+    users.push(newUser);
+    return users;
+}
 
 let entries = []
 function updateTable(newEntry, entries){
