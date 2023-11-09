@@ -1,10 +1,24 @@
+async function loadtable(){
+    let entries = [];
+    try {
+        const response = await fetch('api/table');
+        entries = await response.json();
+        localStorage.setItem('table', JSON.stringify(entries));
+        
+    }catch {
+        const entryCache = localStorage.getItem('table');
+        if(entryCache){
+            entries = JSON.parse(entryCache);
+        }
+    }
+    loadTableData(entries);
+}
+
 class TimeAnalytic {
 
     constructor(){
     const username = document.getElementById("user_name");
     username.textContent= this.getUserName();
-    loadTable();
-    
     }
 
 
@@ -56,23 +70,17 @@ function fillTable(){
     }
 }
 
-function loadTable() {
-    if(localStorage.getItem('table') != null){
-        const data = JSON.parse(localStorage.getItem('table'));
-        console.log(data);
-        var table = document.getElementById('DataTable');
-
-
-        for(i = 0; i < data.length; i++){
-            var row = table.insertRow(i+1);
-            var cell_1 = row.insertCell(0);
-            var cell_2 = row.insertCell(1);
-            var cell_3 = row.insertCell(2);
-            cell_1.innerHTML = data[i].Subject;
-            cell_2.innerHTML = data[i].Description;
-            cell_3.innerHTML = data[i].Time;
-        }
-    }   
+function loadTableData(data) {
+    var table = document.getElementById('DataTable');
+    for(i = 0; i < data.length; i++){
+        var row = table.insertRow(i+1);
+        var cell_1 = row.insertCell(0);
+        var cell_2 = row.insertCell(1);
+        var cell_3 = row.insertCell(2);
+        cell_1.innerHTML = data[i].Subject;
+        cell_2.innerHTML = data[i].Description;
+        cell_3.innerHTML = data[i].Time;
+    } 
 }
 
 
@@ -84,3 +92,4 @@ function clearTable(){
     }
 }
 
+loadtable();

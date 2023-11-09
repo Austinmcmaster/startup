@@ -1,3 +1,37 @@
+async function loadLeaderboard(){
+    let times = []
+    try {
+        const response = await fetch('api/times');
+        times = await response.json();
+        localStorage.setItem('leaderboard', JSON.stringify(times));
+        
+
+    }catch {
+        const timesText = localStorage.getItem('leaderboard');
+        if(timesText){
+            times = JSON.parse(timesText)
+        }
+    }
+    setLeaderboardView(times);
+}
+
+async function loadtable(){
+    let entries = [];
+    try {
+        const response = await fetch('api/table');
+        entries = await response.json();
+        localStorage.setItem('table', JSON.stringify(entries));
+        
+    }catch {
+        const entryCache = localStorage.getItem('table');
+        if(entryCache){
+            entries = JSON.parse(entryCache);
+        }
+    }
+    loadTableData(entries);
+}
+
+
 function displayQuote(data){
     fetch('https://catfact.ninja/fact')
     .then((response) => response.json())
@@ -16,9 +50,7 @@ class TimeAnalytic {
     constructor(){
     const username = document.querySelector('.username_a');
     username.textContent= this.getUserName();
-    loadTable();
     loadUsers();
-    setLeaderboardView();
     }
 
 
@@ -71,23 +103,17 @@ function fillTable(){
     }
 }
 
-function loadTable() {
-    if(localStorage.getItem('table') != null){
-        const data = JSON.parse(localStorage.getItem('table'));
-        console.log(data);
-        var table = document.getElementById('DataTable');
-
-
-        for(i = 0; i < data.length; i++){
-            var row = table.insertRow(i+1);
-            var cell_1 = row.insertCell(0);
-            var cell_2 = row.insertCell(1);
-            var cell_3 = row.insertCell(2);
-            cell_1.innerHTML = data[i].Subject;
-            cell_2.innerHTML = data[i].Description;
-            cell_3.innerHTML = data[i].Time;
-        }
-    }   
+function loadTableData(data) {
+    var table = document.getElementById('DataTable');
+    for(i = 0; i < data.length; i++){
+        var row = table.insertRow(i+1);
+        var cell_1 = row.insertCell(0);
+        var cell_2 = row.insertCell(1);
+        var cell_3 = row.insertCell(2);
+        cell_1.innerHTML = data[i].Subject;
+        cell_2.innerHTML = data[i].Description;
+        cell_3.innerHTML = data[i].Time;
+    } 
 }
 
 const textarea = document.getElementById("webchat");
@@ -132,31 +158,22 @@ function getUser(){
 }
 
 
-function setLeaderboardView(){
+function setLeaderboardView(times){
     const leaderboard = document.getElementById("leaderboard");
 
-    let elements = [];
-
-    if(localStorage.getItem('table') != null){
-        const data = JSON.parse(localStorage.getItem('table'));
-
-        let topscore = 0;
-        for(i = 0; i < data.length; i++){
-            if(topscore < data[i].Time){
-                topscore = i;
-            }
-        }
-
-        var row = leaderboard.insertRow(1);
+    for(const [i, time] of times.entries()){
+        var row = leaderboard.insertRow(i+1);
         var cell_1 = row.insertCell(0);
         var cell_2 = row.insertCell(1);
         var cell_3 = row.insertCell(2);
-        cell_1.innerHTML = 1
-        cell_2.innerHTML = getUser();
-        cell_3.innerHTML = data[topscore].Time;
+        cell_1.innerHTML = i+1
+        cell_2.innerHTML = time.user;
+        cell_3.innerHTML = time.time;
     }
 }
 
+loadLeaderboard();
+loadtable();
 
 
 
