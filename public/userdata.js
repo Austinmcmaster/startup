@@ -1,16 +1,26 @@
 async function loadtable(){
     let entries = [];
+    let data = [];
     try {
         const response = await fetch('api/table');
-        entries = await response.json();
-        localStorage.setItem('table', JSON.stringify(entries));
+        data = await response.json();
+        localStorage.setItem('table', JSON.stringify(data));
         
     }catch {
         const entryCache = localStorage.getItem('table');
         if(entryCache){
-            entries = JSON.parse(entryCache);
+            data = JSON.parse(entryCache);
         }
     }
+
+    const userObject = localStorage.getItem("userObject");
+    const user = JSON.parse(userObject);
+    for(var i = 0; i < data.length; i++){
+        if(user.UserID == data[i].UserID){
+            entries.push(data[i]);
+        }
+    }
+
     loadTableData(entries);
 }
 

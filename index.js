@@ -21,6 +21,10 @@ apiRouter.post('/times', (req,res) => {
     times = updateTimes(req.body, times);
     res.send(times);
 })
+apiRouter.post('/times/delete',(req,res) =>{
+    times.length = 0;
+    res.send(times);
+});
 
 apiRouter.get('/table', (_req,res) =>{
     res.send(entries);

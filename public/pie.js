@@ -1,15 +1,25 @@
 async function makePie(){
     let data = [];
+    let dataset = []
     try {
         const response = await fetch('api/table');
-        data = await response.json();
+        dataset = await response.json();
         
     }catch {
         const entryCache = localStorage.getItem('table');
         if(entryCache){
-            data = JSON.parse(entryCache);
+            dataset = JSON.parse(entryCache);
         }
     }
+    const userObject = localStorage.getItem("userObject");
+    const user = JSON.parse(userObject);
+    for(var i = 0; i < dataset.length; i++){
+        if(user.UserID == dataset[i].UserID){
+            data.push(data[i]);
+        }
+    }
+
+
 
     let values = [];
     let labels = [];
