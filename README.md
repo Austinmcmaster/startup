@@ -68,8 +68,8 @@ For this deliverable I implemented by JavaScript so that the application works f
 ## Startup Service
 For this deliverable, I implemented backend points, that are used in various points in my implimentation. I have a table, user, times, endpoints which are used for storing data. I finished the pie chart implementation which updates once entries are submitted. Along with a leaderboard which keeps track of your current highest entry. Eventually it will connect with other users and there highest entries. Third party endpoint is simply cat quotes that is posted in the text area every refresh. Login and signup also work and store data at endpoints. Not sure if that was too much for this assignment.
 
-* **Node.js/Express HTTP service**- Implemented
-* **Static middleware for frontend**- Implemented with index.js
-* **Third Party endpoints**- fetch cat quotes that are used within the main page in the text area section where the chat will be eventually. Fetch code located in main.js.
-* **Backend service endpoint**- Setup, for table use, users, times for leaderboard. Used to store data currently instead of local storage.
-* **Front End Calls service endpoint**- All my storage is called using fetch for various reasons of filling pie chart, leaderboard, table, along with login as well.
+* **Node.js/Express HTTP service**- Implemented.
+* **Static middleware for frontend**- Implemented.
+* **Third Party endpoints**- Fetch cat quotes that are used within the main page in the text area section. Fetch code located in main.js.
+* **Backend service endpoint**- Setup, for table entries, users, and times for the leaderboard. Used to store data currently instead of local storage.
+* **Front End Calls service endpoint**- All my storage is called using fetch for various reasons of filling the pie chart, leaderboard, table, along with login authentication as well.
