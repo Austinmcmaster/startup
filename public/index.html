@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <link rel="stylesheet" href="home.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     
 </head>
 <body>
@@ -50,15 +51,7 @@
             </form>
 
             <div class="pieContainer">
-                <h2>Pie Chart</h2>
-                <canvas id = "piechart">
-                <script src="startup\node_modules\chart.js\dist\chart.cjs">
-                    var ctx = document.getElementById('piechart');
-                    var myChart = new Chart(ctx, {
-                       type: 'pie' 
-                    })
-                </script>
-                </div>
+            <canvas id = "pieChart"></canvas>    
             </div>
         </div>
 
@@ -81,6 +74,7 @@
         </div>
     </footer>
     <script src="main.js"></script>
+    <script src="pie.js"></script>
 
 </body>
 </html>

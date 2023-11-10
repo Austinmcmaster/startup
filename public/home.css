@@ -199,13 +199,13 @@ button {
         display: flex;
         margin-top: 40px;
         margin-left: 250px;
-        width: 300px; 
-        height: 300px; 
+        width: 400px; 
+        height: 400px; 
         border-radius: 50%; 
-        background-image: conic-gradient( 
+        /* background-image: conic-gradient( 
             pink 70deg,  
             lightblue 0 235deg,  
-            orange 0); 
+            orange 0);  */
         float: right;
 }
 
