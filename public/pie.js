@@ -1,9 +1,9 @@
-const xVal = ["Value_1", "Value_2"]
-const yVal = [50,36]
+const xVal = []
+const yVal = [30,50,1]
 const barCol = ["blue","brown"]
 
 new Chart("pieChart", {
-    type: "bar",
+    type: "pie",
     data: {
         labels:xVal,
         datasets:[{
@@ -16,7 +16,7 @@ new Chart("pieChart", {
     options: {
         title:{
             display:true,
-            text: "Chart Title",
+            text: "Pie Chart",
             fontsize: 40,
         }
     }

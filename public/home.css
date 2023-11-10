@@ -190,23 +190,16 @@ button {
   box-shadow: 0px 2px 6px rgba(0,0,0,0.3);
 }
 
-.pieContainer h2 {
+.pieContainer  {
     margin-left: 250px;
     margin-top: 20px;
-}
-
-#piechart {
-        display: flex;
-        margin-top: 40px;
-        margin-left: 250px;
-        width: 400px; 
-        height: 400px; 
-        border-radius: 50%; 
-        /* background-image: conic-gradient( 
-            pink 70deg,  
-            lightblue 0 235deg,  
-            orange 0);  */
-        float: right;
+    display: flex;
+    margin-top: 40px;
+    margin-left: 250px;
+    width: 400px; 
+    height: 400px; 
+    border-radius: 50%; 
+    float: right;
 }
 
 .weblabel label{
