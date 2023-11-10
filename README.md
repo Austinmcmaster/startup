@@ -64,3 +64,12 @@ For this deliverable I implemented by JavaScript so that the application works f
 * **Database**- Time entries are ready for the database along with login information. They are all stored locally for now. 
 * **WebSocket**- Websocket applies to both leaderboard and webchat. The webchat will periodically put in some connection messages. This will implement the websocket for communication later. The leaderboard displays the users current top data, eventually once more users and sockets are implemented, all users will be displayed on the leaderboard.
 * **Application Logic**- Logic implemented for time entries is avaiable on both datapage and home page. The data is also clearable which will update the leaderboard and the table display. The pie chart has not been updated yet, since I will be using node.js api. So in the next deliverable it will be ready to go.
+
+## Startup Service
+For this deliverable, I implemented backend points, that are used in various points in my implimentation. I have a table, user, times, endpoints which are used for storing data. I finished the pie chart implementation which updates once entries are submitted. Along with a leaderboard which keeps track of your current highest entry. Eventually it will connect with other users and there highest entries. Third party endpoint is simply cat quotes that is posted in the text area every refresh. Login and signup also work and store data at endpoints. Not sure if that was too much for this assignment.
+
+* **Node.js/Express HTTP service**- Implemented
+* **Static middleware for frontend**- Implemented with index.js
+* **Third Party endpoints**- fetch cat quotes that are used within the main page in the text area section where the chat will be eventually. Fetch code located in main.js.
+* **Backend service endpoint**- Setup, for table use, users, times for leaderboard. Used to store data currently instead of local storage.
+* **Front End Calls service endpoint**- All my storage is called using fetch for various reasons of filling pie chart, leaderboard, table, along with login as well.
