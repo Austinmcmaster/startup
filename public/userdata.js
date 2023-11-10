@@ -33,14 +33,9 @@ class TimeAnalytic {
 
 
     getUserName() {
-        const userObject = localStorage.getItem('userObject');
-        var data = JSON.parse(userObject);
-        if(userObject == null){
-            return "Unknown User"
-        }
-        else{
-            return data.username;
-        }
+        const user = getUserData();
+        localStorage.setItem('userObject',JSON.stringify(user));
+        return user.username;
         
     }
 }
@@ -116,6 +111,20 @@ function clearTable(){
 
     location.reload();
     
+}
+
+function getUserData(){
+    const userObject = localStorage.getItem('userObject');
+    var data = JSON.parse(userObject);
+    if(userObject != null){
+        return data;
+    }
+
+    return  {
+        UserID: crypto.randomUUID(), 
+        username: "Unknown User",
+    };
+
 }
 
 loadtable();
