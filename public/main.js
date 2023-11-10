@@ -138,15 +138,9 @@ class TimeAnalytic {
 
 
 function getUserName(){
-    const userObject = localStorage.getItem('userObject');
-    var data = JSON.parse(userObject);
-    if(userObject == null){
-        return "Unknown User"
-    }
-    else{
-        return data.username;
-    }
-    
+    const user = getUserData();
+    localStorage.setItem('userObject',JSON.stringify(user));
+    return user.username;
 }
 
 const timeAnalytic = new TimeAnalytic();

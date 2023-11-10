@@ -15,7 +15,7 @@ async function makePie(){
     const user = JSON.parse(userObject);
     for(var i = 0; i < dataset.length; i++){
         if(user.UserID == dataset[i].UserID){
-            data.push(data[i]);
+            data.push(dataset[i]);
         }
     }
 
