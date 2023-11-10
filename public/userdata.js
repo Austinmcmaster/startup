@@ -94,11 +94,18 @@ function loadTableData(data) {
 
 
 function clearTable(){
-    if(localStorage.getItem('table') != null){
-        localStorage.removeItem('table');
-        loadTable();
-        location.reload();
-    }
+    fetch('api/delete', {
+        method: 'POST',
+        headers: {
+        'Content-type': 'application/json; charset=UTF-8',},
+        })
+        .then((response) => response.json())
+        .then((jsonResponse) => {
+        console.log(jsonResponse);
+        });
+
+    location.reload();
+    
 }
 
 loadtable();

@@ -28,6 +28,38 @@ async function loadtable(){
             entries = JSON.parse(entryCache);
         }
     }
+
+    var max = -1;
+    var max_index;
+    for(i = 0; i < entries.length; i++){
+        if (entries[i].Time > max){
+            max = entries[i].Time;
+            max_index = i;
+        }
+    }
+
+    if(entries.length > 0){
+        try{
+            await fetch('api/times', {
+                method: 'POST',
+                body: JSON.stringify(entries[max_index]),
+                headers: {
+                'Content-type': 'application/json; charset=UTF-8',},
+                })
+                .then((response) => response.json())
+                .then((jsonResponse) => {
+                console.log(jsonResponse);
+            });
+
+            await fetch('api/times')
+                .then((response) => response.json())
+                .then((data) => {
+                   setLeaderboardView(data); 
+            });
+        }catch{
+            console.log("Unable to post to leaderboard");
+        }
+    }
     loadTableData(entries);
 }
 
@@ -43,11 +75,13 @@ async function fillTable(){
 
     const description = document.querySelector("#descriptionbox");
 
+    const userObject = getUserData();
+
     let tableObject = {
         Subject : subject.value,
         Description: description.value,
         Time: hours,
-        UserID: 3, // Add in ID connected to objects
+        username: userObject.username,
         entryID: crypto.randomUUID(),
     };
 
@@ -85,20 +119,22 @@ class TimeAnalytic {
 
     constructor(){
     const username = document.querySelector('.username_a');
-    username.textContent= this.getUserName();
+    username.textContent=getUserName();
     loadUsers();
     }
-    getUserName() {
-        const userObject = localStorage.getItem('userObject');
-        var data = JSON.parse(userObject);
-        if(userObject == null){
-            return "Unknown User"
-        }
-        else{
-            return data.username;
-        }
-        
+}
+
+
+function getUserName(){
+    const userObject = localStorage.getItem('userObject');
+    var data = JSON.parse(userObject);
+    if(userObject == null){
+        return "Unknown User"
     }
+    else{
+        return data.username;
+    }
+    
 }
 
 const timeAnalytic = new TimeAnalytic();
@@ -125,7 +161,8 @@ function loadTableData(data) {
         cell_1.innerHTML = data[i].Subject;
         cell_2.innerHTML = data[i].Description;
         cell_3.innerHTML = data[i].Time;
-    } 
+    }
+
 }
 
 const textarea = document.getElementById("webchat");
@@ -154,8 +191,8 @@ function loadUsers(){
 web_button.addEventListener('click', function handleClick(){
 
     if(web_input.checkValidity()){
-        user = localStorage.getItem('username') ?? "Unknown User"
-        usuer = user.trim();
+        user = getUserName();
+        user = user.trim().toLowerCase();
         textarea.value += user;
         textarea.value += ": " + web_input.value;
         textarea.value += "\n";
@@ -168,20 +205,37 @@ web_button.addEventListener('click', function handleClick(){
 
 function setLeaderboardView(times){
     const leaderboard = document.getElementById("leaderboard");
-
+    for (var i = 1; i < leaderboard.rows.length; i++) {
+        leaderboard.deleteRow(i);
+    }
     for(const [i, time] of times.entries()){
         var row = leaderboard.insertRow(i+1);
         var cell_1 = row.insertCell(0);
         var cell_2 = row.insertCell(1);
         var cell_3 = row.insertCell(2);
         cell_1.innerHTML = i+1
-        cell_2.innerHTML = time.user;
-        cell_3.innerHTML = time.time;
+        cell_2.innerHTML = time.username
+        cell_3.innerHTML = time.Time;
     }
 }
 
-loadLeaderboard();
+function getUserData(){
+    const userObject = localStorage.getItem('userObject');
+    var data = JSON.parse(userObject);
+    if(userObject != null){
+        return data;
+    }
+
+    return  {
+        UserID: crypto.randomUUID(), 
+        username: "Unknown User",
+    };
+
+}
+
 loadtable();
+loadLeaderboard();
+
 
 
 
