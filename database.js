@@ -31,5 +31,10 @@ function getEntries(userid){
 
 }
 
+function deleteEntries(UserID){
+  const query = {UserID: UserID};
+  tableCollection.deleteMany(query);
+}
 
-module.exports = {addEntry, getEntries};
+
+module.exports = {addEntry, getEntries, deleteEntries};

@@ -24,6 +24,9 @@ apiRouter.post('/times/delete',(req,res) =>{
     res.send(times);
 });
 
+
+
+// Entry Table Endpoints 
 apiRouter.get('/table/:id', async (_req,res) =>{
     const table = await DB.getEntries(_req.params.id);
     res.send(table);
@@ -35,11 +38,13 @@ apiRouter.post('/table', async (req,res) =>{
     res.send(table);
 });
 
-apiRouter.post('/delete', (req,res) =>{
-    entries.length = 0;
-    res.send(entries);
+apiRouter.delete('/table/:id', async (req,res) =>{
+    await DB.deleteEntries(req.params.id);
+    var data = await DB.getEntries(req.params.id)
+    res.send(data);
 });
 
+// User Table Endpoints
 apiRouter.get('/user', (_req,res) => {
     res.send(users);
 });

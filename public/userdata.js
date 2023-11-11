@@ -1,8 +1,9 @@
 async function loadtable(){
     let entries = [];
     let data = [];
+    let user_info = await getUserData();
     try {
-        const response = await fetch('api/table');
+        const response = await fetch(`api/table/${user_info.UserID}`);
         data = await response.json();
         localStorage.setItem('table', JSON.stringify(data));
         
@@ -98,12 +99,10 @@ function loadTableData(data) {
 }
 
 
-function clearTable(){
-    fetch('api/delete', {
-        method: 'POST',
-        headers: {
-        'Content-type': 'application/json; charset=UTF-8',},
-        })
+async function clearTable(){
+    let user_info = getUserData();
+    fetch(`api/table/${user_info.UserID}`, {
+        method: 'DELETE'})
         .then((response) => response.json())
         .then((jsonResponse) => {
         console.log(jsonResponse);
