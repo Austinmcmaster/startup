@@ -49,14 +49,11 @@ function updateLeaderboard(timeEntry){
   }
   else{
     let prevEntry = leaderboardCollection.findOne(query);
-  if(prevEntry.Time < timeEntry.Time){
-    leaderboardCollection.deleteOne(query);
-    leaderboardCollection.insertOne(timeEntry);
+    if(prevEntry.Time < timeEntry.Time){
+      leaderboardCollection.deleteOne(query);
+      leaderboardCollection.insertOne(timeEntry);
     }
   }
-
-  var leaderboard_table = leaderboardCollection.find().toArray();
-  return leaderboard_table;
 }
 
 

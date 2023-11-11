@@ -104,17 +104,20 @@ async function loadLeaderboard(){
 
 function setLeaderboardView(times){
     const leaderboard = document.getElementById("leaderboard");
+    times.sort(function(a,b){b.Time - a.Time})
+
     for (var i = 1; i < leaderboard.rows.length; i++) {
         leaderboard.deleteRow(i);
     }
-    for(const [i, time] of times.entries()){
-        var row = leaderboard.insertRow(i+1);
+
+    for(var j = 0; j < 10; j ++){
+        var row = leaderboard.insertRow(j+1);
         var cell_1 = row.insertCell(0);
         var cell_2 = row.insertCell(1);
         var cell_3 = row.insertCell(2);
-        cell_1.innerHTML = i+1
-        cell_2.innerHTML = time.username
-        cell_3.innerHTML = time.Time;
+        cell_1.innerHTML = j+1
+        cell_2.innerHTML = times[j].username
+        cell_3.innerHTML = times[j].Time;
     }
 }
 

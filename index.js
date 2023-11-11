@@ -16,8 +16,8 @@ apiRouter.get('/times', async (_req,res) => {
     return leaderboard;
 });
 
-apiRouter.post('/times', (req,res) => {
-    DB.updateLeaderboard(req.body);
+apiRouter.post('/times', async (req,res) => {
+    await DB.updateLeaderboard(req.body);
     const leaderboard = DB.getLeaderboard();
     return leaderboard
 
