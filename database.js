@@ -37,7 +37,7 @@ function deleteEntries(UserID){
 }
 
 function getLeaderboard(){
-  return leaderboardCollection.find();
+  return leaderboardCollection.find().toArray();
 }
 
 function updateLeaderboard(timeEntry){

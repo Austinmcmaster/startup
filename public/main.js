@@ -39,6 +39,18 @@ async function fillTable(){
     .then((jsonResponse) => {
     console.log(jsonResponse);
     });
+
+    await fetch('api/times', {
+        method: 'POST',
+        body: JSON.stringify(tableObject),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+        }
+    })
+    .then((response) => response.json)
+    .then((jsonResponse) => {
+        console.log(jsonResponse);
+    })
 }
 
 async function loadtable(){
@@ -81,8 +93,6 @@ async function loadLeaderboard(){
         const response = await fetch('api/times');
         times = await response.json();
         localStorage.setItem('leaderboard', JSON.stringify(times));
-        
-
     }catch {
         const timesText = localStorage.getItem('leaderboard');
         if(timesText){

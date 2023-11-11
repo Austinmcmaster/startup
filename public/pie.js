@@ -43,5 +43,5 @@ async function makePie(){
         }
     })
 }
-setInterval(function(){makePie()}, 15000);
+setInterval(function(){makePie()}, 60000);
 makePie();
