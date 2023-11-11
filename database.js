@@ -36,5 +36,13 @@ function deleteEntries(UserID){
   tableCollection.deleteMany(query);
 }
 
+function getLeaderboard(){
+  return leaderboardCollection.find();
+}
 
-module.exports = {addEntry, getEntries, deleteEntries};
+function updateLeaderboard(){
+  
+}
+
+
+module.exports = {addEntry, getEntries, deleteEntries, getLeaderboard};

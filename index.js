@@ -11,20 +11,14 @@ app.use(express.static('public'));
 var apiRouter = express.Router();
 app.use('/api', apiRouter);
 
-apiRouter.get('/times', (_req,res) => {
-    res.send(times);
+apiRouter.get('/times', async (_req,res) => {
+    const leaderboard = DB.getLeaderboard();
+    return leaderboard;
 });
 
 apiRouter.post('/times', (req,res) => {
-    times = updateTimes(req.body, times);
-    res.send(times);
+    
 })
-apiRouter.post('/times/delete',(req,res) =>{
-    times.length = 0;
-    res.send(times);
-});
-
-
 
 // Entry Table Endpoints 
 apiRouter.get('/table/:id', async (_req,res) =>{
@@ -67,39 +61,5 @@ let users = []
 function updateUsers(newUser, users){
     users.push(newUser);
     return users;
-}
-
-let times = []
-function updateTimes(newTime, times){
-    let found = false;
-    let update = false
-    let updateindex = -1;
-    for(const [i, prevTime] of times.entries()){
-        if(newTime.entryID === prevTime.entryID){
-            found = true
-            break;
-        }
-        if(newTime.USERID === prevTime.USERID){
-            if(newTime.Time > prevTime.Time){
-                update = true;
-                updateindex = i;
-                break;
-            }
-        }
-
-    }
-    if(update){
-        times.splice(updateindex,1);
-    }
-
-    if(!found){
-        times.push(newTime);
-    }
-
-    if(times.length > 10){
-        times.length = 10;
-    }
-
-    return times;
 }
 
