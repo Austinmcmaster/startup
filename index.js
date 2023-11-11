@@ -17,7 +17,10 @@ apiRouter.get('/times', async (_req,res) => {
 });
 
 apiRouter.post('/times', (req,res) => {
-    
+    DB.updateLeaderboard(req.body);
+    const leaderboard = DB.getLeaderboard();
+    return leaderboard
+
 })
 
 // Entry Table Endpoints 

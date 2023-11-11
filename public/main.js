@@ -42,7 +42,6 @@ async function fillTable(){
 }
 
 async function loadtable(){
-    let entries = [];
     let data = [];
     let user_info = await getUserData();
     try {
@@ -56,46 +55,7 @@ async function loadtable(){
             data = JSON.parse(entryCache);
         }
     }
-
-    const userObject = localStorage.getItem("userObject");
-    const user = JSON.parse(userObject);
-    for(var i = 0; i < data.length; i++){
-        if(user.UserID == data[i].UserID){
-            entries.push(data[i]);
-        }
-    }
-    var max = -1;
-    var max_index;
-    for(i = 0; i < entries.length; i++){
-        if (entries[i].Time > max){
-            max = entries[i].Time;
-            max_index = i;
-        }
-    }
-
-    if(entries.length > 0){
-        try{
-            await fetch('api/times', {
-                method: 'POST',
-                body: JSON.stringify(entries[max_index]),
-                headers: {
-                'Content-type': 'application/json; charset=UTF-8',},
-                })
-                .then((response) => response.json())
-                .then((jsonResponse) => {
-                console.log(jsonResponse);
-            });
-
-            await fetch('api/times')
-                .then((response) => response.json())
-                .then((data) => {
-                   setLeaderboardView(data); 
-            });
-        }catch{
-            console.log("Unable to post to leaderboard");
-        }
-    }
-    loadTableData(entries);
+    loadTableData(data);
 }
 
 function loadTableData(data) {
@@ -170,17 +130,18 @@ function displayQuote(data){
 class TimeAnalytic {
 
     constructor(){
-    const username = document.querySelector('.username_a');
-    username.textContent=getUserName();
+    const username = document.getElementById("user_name");
+    username.textContent= this.getUserName();
     loadUsers();
     }
-}
 
 
-async function getUserName(){
-    const user = getUserData();
-    localStorage.setItem('userObject',JSON.stringify(user));
-    return user.username;
+    getUserName() {
+        const user = getUserData();
+        localStorage.setItem('userObject',JSON.stringify(user));
+        return user.username;
+        
+    }
 }
 
 const timeAnalytic = new TimeAnalytic();
@@ -238,6 +199,7 @@ function getUserData(){
     };
 
 }
+
 
 loadtable();
 loadLeaderboard();

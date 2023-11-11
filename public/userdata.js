@@ -1,5 +1,4 @@
 async function loadtable(){
-    let entries = [];
     let data = [];
     let user_info = await getUserData();
     try {
@@ -14,15 +13,7 @@ async function loadtable(){
         }
     }
 
-    const userObject = localStorage.getItem("userObject");
-    const user = JSON.parse(userObject);
-    for(var i = 0; i < data.length; i++){
-        if(user.UserID == data[i].UserID){
-            entries.push(data[i]);
-        }
-    }
-
-    loadTableData(entries);
+    loadTableData(data);
 }
 
 class TimeAnalytic {

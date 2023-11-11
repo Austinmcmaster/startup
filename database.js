@@ -40,9 +40,24 @@ function getLeaderboard(){
   return leaderboardCollection.find();
 }
 
-function updateLeaderboard(){
-  
+function updateLeaderboard(timeEntry){
+  const query = {UserID : timeEntry.UserID}
+  var leaderboardObject = leaderboardCollection.findOne(query);
+
+  if(leaderboardObject == null){
+    leaderboardCollection.insertOne(timeEntry);
+  }
+  else{
+    let prevEntry = leaderboardCollection.findOne(query);
+  if(prevEntry.Time < timeEntry.Time){
+    leaderboardCollection.deleteOne(query);
+    leaderboardCollection.insertOne(timeEntry);
+    }
+  }
+
+  var leaderboard_table = leaderboardCollection.find().toArray();
+  return leaderboard_table;
 }
 
 
-module.exports = {addEntry, getEntries, deleteEntries, getLeaderboard};
+module.exports = {addEntry, getEntries, deleteEntries, getLeaderboard,updateLeaderboard};
