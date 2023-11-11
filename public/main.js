@@ -1,25 +1,52 @@
-async function loadLeaderboard(){
-    let times = []
-    try {
-        const response = await fetch('api/times');
-        times = await response.json();
-        localStorage.setItem('leaderboard', JSON.stringify(times));
-        
+// Entry Table
+const time_form = document.getElementById("time_form");
+time_form.addEventListener("submit", checkValidity);
 
-    }catch {
-        const timesText = localStorage.getItem('leaderboard');
-        if(timesText){
-            times = JSON.parse(timesText)
-        }
+function checkValidity(event){
+    if(time_form.checkValidity()){
+        fillTable();
     }
-    setLeaderboardView(times);
+}
+
+async function fillTable(){
+    const subject = document.querySelector("#Subject");
+    const getSeconds = s => s.split(":").reduce((acc, curr) => acc * 60 + +curr, 0)
+    var end = getSeconds(document.getElementById("Time_out").value);
+    var start = getSeconds(document.getElementById("Time_in").value);
+    var res = Math.abs(end - start);
+    var hours = Math.round(res / 60);
+
+
+    const description = document.querySelector("#descriptionbox");
+
+    const userObject = getUserData();
+
+    let tableObject = {
+        Subject : subject.value,
+        Description: description.value,
+        Time: hours,
+        username: userObject.username,
+        UserID: userObject.UserID,
+        entryID: crypto.randomUUID(),
+    };
+    await fetch('api/table', {
+    method: 'POST',
+    body: JSON.stringify(tableObject),
+    headers: {
+    'Content-type': 'application/json; charset=UTF-8',},
+    })
+    .then((response) => response.json())
+    .then((jsonResponse) => {
+    console.log(jsonResponse);
+    });
 }
 
 async function loadtable(){
     let entries = [];
     let data = [];
+    let user_info = await getUserData();
     try {
-        const response = await fetch('api/table');
+        const response = await fetch(`api/table/${user_info.UserID}`);
         data = await response.json();
         localStorage.setItem('table', JSON.stringify(data));
         
@@ -37,9 +64,6 @@ async function loadtable(){
             entries.push(data[i]);
         }
     }
-
-
-
     var max = -1;
     var max_index;
     for(i = 0; i < entries.length; i++){
@@ -74,42 +98,58 @@ async function loadtable(){
     loadTableData(entries);
 }
 
-async function fillTable(){
-    const subject = document.querySelector("#Subject");
-    const getSeconds = s => s.split(":").reduce((acc, curr) => acc * 60 + +curr, 0)
-    var end = getSeconds(document.getElementById("Time_out").value);
-    var start = getSeconds(document.getElementById("Time_in").value);
+function loadTableData(data) {
+    var table = document.getElementById('DataTable');
+    for(i = 0; i < data.length; i++){
+        var row = table.insertRow(i+1);
+        var cell_1 = row.insertCell(0);
+        var cell_2 = row.insertCell(1);
+        var cell_3 = row.insertCell(2);
+        cell_1.innerHTML = data[i].Subject;
+        cell_2.innerHTML = data[i].Description;
+        cell_3.innerHTML = data[i].Time;
+    }
 
-    var res = Math.abs(end - start);
-    var hours = Math.round(res / 60);
-
-
-    const description = document.querySelector("#descriptionbox");
-
-    const userObject = getUserData();
-
-    let tableObject = {
-        Subject : subject.value,
-        Description: description.value,
-        Time: hours,
-        username: userObject.username,
-        UserID: userObject.UserID,
-        entryID: crypto.randomUUID(),
-    };
-
-    fetch('api/table', {
-    method: 'POST',
-    body: JSON.stringify(tableObject),
-    headers: {
-    'Content-type': 'application/json; charset=UTF-8',},
-    })
-    .then((response) => response.json())
-    .then((jsonResponse) => {
-    console.log(jsonResponse);
-    });
 }
 
 
+
+// Leaderboard
+async function loadLeaderboard(){
+    let times = []
+    try {
+        const response = await fetch('api/times');
+        times = await response.json();
+        localStorage.setItem('leaderboard', JSON.stringify(times));
+        
+
+    }catch {
+        const timesText = localStorage.getItem('leaderboard');
+        if(timesText){
+            times = JSON.parse(timesText)
+        }
+    }
+    setLeaderboardView(times);
+}
+
+function setLeaderboardView(times){
+    const leaderboard = document.getElementById("leaderboard");
+    for (var i = 1; i < leaderboard.rows.length; i++) {
+        leaderboard.deleteRow(i);
+    }
+    for(const [i, time] of times.entries()){
+        var row = leaderboard.insertRow(i+1);
+        var cell_1 = row.insertCell(0);
+        var cell_2 = row.insertCell(1);
+        var cell_3 = row.insertCell(2);
+        cell_1.innerHTML = i+1
+        cell_2.innerHTML = time.username
+        cell_3.innerHTML = time.Time;
+    }
+}
+
+
+// Cat Quote Fetch
 function displayQuote(data){
     try{
     fetch('https://catfact.ninja/fact')
@@ -137,7 +177,7 @@ class TimeAnalytic {
 }
 
 
-function getUserName(){
+async function getUserName(){
     const user = getUserData();
     localStorage.setItem('userObject',JSON.stringify(user));
     return user.username;
@@ -145,31 +185,8 @@ function getUserName(){
 
 const timeAnalytic = new TimeAnalytic();
 
-const time_form = document.getElementById("time_form");
-time_form.addEventListener("submit", checkValidity);
-
-function checkValidity(event){
-    if(time_form.checkValidity()){
-        fillTable();
-    }
-}
 
 
-
-
-function loadTableData(data) {
-    var table = document.getElementById('DataTable');
-    for(i = 0; i < data.length; i++){
-        var row = table.insertRow(i+1);
-        var cell_1 = row.insertCell(0);
-        var cell_2 = row.insertCell(1);
-        var cell_3 = row.insertCell(2);
-        cell_1.innerHTML = data[i].Subject;
-        cell_2.innerHTML = data[i].Description;
-        cell_3.innerHTML = data[i].Time;
-    }
-
-}
 
 const textarea = document.getElementById("webchat");
 const web_button = document.getElementById("web_button");
@@ -207,23 +224,6 @@ web_button.addEventListener('click', function handleClick(){
     }
 
 });
-
-
-function setLeaderboardView(times){
-    const leaderboard = document.getElementById("leaderboard");
-    for (var i = 1; i < leaderboard.rows.length; i++) {
-        leaderboard.deleteRow(i);
-    }
-    for(const [i, time] of times.entries()){
-        var row = leaderboard.insertRow(i+1);
-        var cell_1 = row.insertCell(0);
-        var cell_2 = row.insertCell(1);
-        var cell_3 = row.insertCell(2);
-        cell_1.innerHTML = i+1
-        cell_2.innerHTML = time.username
-        cell_3.innerHTML = time.Time;
-    }
-}
 
 function getUserData(){
     const userObject = localStorage.getItem('userObject');

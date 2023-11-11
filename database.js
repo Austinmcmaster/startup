@@ -17,3 +17,19 @@ const userCollection = db.collection("user");
   console.log(`Unable to connect to database with ${url} because ${ex.message}`);
   process.exit(1);
 });
+
+
+async function addEntry(entry){
+  const result = await tableCollection.insertOne(entry);
+  return result;
+}
+
+function getEntries(userid){
+  const query = {UserID: userid};
+  const cursor = tableCollection.find(query);
+  return cursor.toArray();
+
+}
+
+
+module.exports = {addEntry, getEntries};

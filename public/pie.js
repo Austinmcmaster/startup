@@ -1,25 +1,17 @@
 async function makePie(){
     let data = [];
-    let dataset = []
+    const userObject = localStorage.getItem("userObject");
+    const user = JSON.parse(userObject);
     try {
-        const response = await fetch('api/table');
-        dataset = await response.json();
+        const response = await fetch(`api/table${user.UserID}`);
+        data = await response.json();
         
     }catch {
         const entryCache = localStorage.getItem('table');
         if(entryCache){
-            dataset = JSON.parse(entryCache);
+            data = JSON.parse(entryCache);
         }
     }
-    const userObject = localStorage.getItem("userObject");
-    const user = JSON.parse(userObject);
-    for(var i = 0; i < dataset.length; i++){
-        if(user.UserID == dataset[i].UserID){
-            data.push(dataset[i]);
-        }
-    }
-
-
 
     let values = [];
     let labels = [];
@@ -51,5 +43,5 @@ async function makePie(){
         }
     })
 }
-
-makePie();
+setInterval(function(){makePie()}, 30000);
+await makePie();

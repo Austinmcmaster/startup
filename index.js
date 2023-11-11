@@ -1,14 +1,12 @@
 const express = require('express');
 const app = express();
+const DB = require('./database.js');
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.json());
 
 app.use(express.static('public'));
-
-
-
 
 var apiRouter = express.Router();
 app.use('/api', apiRouter);
@@ -26,13 +24,17 @@ apiRouter.post('/times/delete',(req,res) =>{
     res.send(times);
 });
 
-apiRouter.get('/table', (_req,res) =>{
-    res.send(entries);
+apiRouter.get('/table/:id', async (_req,res) =>{
+    const table = await DB.getEntries(_req.params.id);
+    res.send(table);
 });
-apiRouter.post('/table', (req,res) =>{
-    entries = updateTable(req.body, entries);
-    res.send(entries);
+
+apiRouter.post('/table', async (req,res) =>{
+    await DB.addEntry(req.body);
+    const table = await DB.getEntries(req.body.UserID);
+    res.send(table);
 });
+
 apiRouter.post('/delete', (req,res) =>{
     entries.length = 0;
     res.send(entries);
@@ -60,12 +62,6 @@ let users = []
 function updateUsers(newUser, users){
     users.push(newUser);
     return users;
-}
-
-let entries = []
-function updateTable(newEntry, entries){
-    entries.push(newEntry);
-    return entries;
 }
 
 let times = []
