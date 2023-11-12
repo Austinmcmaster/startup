@@ -42,13 +42,14 @@ apiRouter.delete('/table/:id', async (req,res) =>{
 });
 
 // User Table Endpoints
-apiRouter.get('/user', (_req,res) => {
-    res.send(users);
+apiRouter.get('/user', async (req,res) => {
+    const user = await DB.getUser(req.body);
+    res.send(user);
 });
 
-apiRouter.post('/user', (req,res) => {
-    users = updateUsers(req.body, users);
-    res.send(users);
+apiRouter.post('/user', async (req,res) => {
+    const user = await DB.addUser(req.body);
+    res.send(user);
 })
 
 
@@ -59,10 +60,4 @@ app.use((_req, res) => {
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
-
-let users = []
-function updateUsers(newUser, users){
-    users.push(newUser);
-    return users;
-}
 

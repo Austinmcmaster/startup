@@ -18,6 +18,27 @@ const userCollection = db.collection("user");
   process.exit(1);
 });
 
+async function addUser(User){
+  const query = {UserID: User.UserID, username:User.username, email: User.email, password: User.password }
+
+  var check = await userCollection.findOne(query);
+  if(check == null){
+    const result = await userCollection.insertOne(User);
+    return result;
+  }
+  return null;
+
+}
+
+async function getUser(User){
+  const query = {UserID: User.UserID, username:User.username, email: User.email, password: User.password }
+  var check = await userCollection.findOne(query);
+  if(check != null){
+    return User
+  }
+  return null;
+}
+
 
 async function addEntry(entry){
   const result = await tableCollection.insertOne(entry);
@@ -65,4 +86,4 @@ async function updateLeaderboard(timeEntry){
 }
 
 
-module.exports = {addEntry, getEntries, deleteEntries, getLeaderboard,updateLeaderboard};
+module.exports = {getUser,addEntry, getEntries, deleteEntries, getLeaderboard,updateLeaderboard, addUser};
