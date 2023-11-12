@@ -12,14 +12,14 @@ var apiRouter = express.Router();
 app.use('/api', apiRouter);
 
 apiRouter.get('/times', async (_req,res) => {
-    const leaderboard = DB.getLeaderboard();
-    return leaderboard;
+    const leaderboard = await DB.getLeaderboard();
+    res.send(leaderboard)
 });
 
 apiRouter.post('/times', async (req,res) => {
     await DB.updateLeaderboard(req.body);
-    const leaderboard = DB.getLeaderboard();
-    return leaderboard
+    const leaderboard = await DB.getLeaderboard();
+    res.send(leaderboard);
 
 })
 

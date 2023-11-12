@@ -29,7 +29,7 @@ async function fillTable(){
         UserID: userObject.UserID,
         entryID: crypto.randomUUID(),
     };
-    await fetch('api/table', {
+    fetch('api/table', {
     method: 'POST',
     body: JSON.stringify(tableObject),
     headers: {
@@ -40,7 +40,7 @@ async function fillTable(){
     console.log(jsonResponse);
     });
 
-    await fetch('api/times', {
+    fetch('api/times', {
         method: 'POST',
         body: JSON.stringify(tableObject),
         headers: {
@@ -51,6 +51,8 @@ async function fillTable(){
     .then((jsonResponse) => {
         console.log(jsonResponse);
     })
+
+    Location.reload();
 }
 
 async function loadtable(){
@@ -104,20 +106,18 @@ async function loadLeaderboard(){
 
 function setLeaderboardView(times){
     const leaderboard = document.getElementById("leaderboard");
-    times.sort(function(a,b){b.Time - a.Time})
-
     for (var i = 1; i < leaderboard.rows.length; i++) {
         leaderboard.deleteRow(i);
     }
 
-    for(var j = 0; j < 10; j ++){
-        var row = leaderboard.insertRow(j+1);
+    for(let i = 0; i < times.length; i++){
+        var row = leaderboard.insertRow(i+1);
         var cell_1 = row.insertCell(0);
         var cell_2 = row.insertCell(1);
         var cell_3 = row.insertCell(2);
-        cell_1.innerHTML = j+1
-        cell_2.innerHTML = times[j].username
-        cell_3.innerHTML = times[j].Time;
+        cell_1.innerHTML = i+1
+        cell_2.innerHTML = times[i].username
+        cell_3.innerHTML = times[i].Time;
     }
 }
 

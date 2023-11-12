@@ -24,9 +24,9 @@ async function addEntry(entry){
   return result;
 }
 
-function getEntries(userid){
+async function getEntries(userid){
   const query = {UserID: userid};
-  const cursor = tableCollection.find(query);
+  const cursor = await tableCollection.find(query);
   return cursor.toArray();
 
 }
@@ -36,24 +36,32 @@ function deleteEntries(UserID){
   tableCollection.deleteMany(query);
 }
 
-function getLeaderboard(){
-  return leaderboardCollection.find().toArray();
+async function getLeaderboard(){
+  var leaderboard = await leaderboardCollection.find();
+  return leaderboard.toArray();
 }
 
-function updateLeaderboard(timeEntry){
+async function updateLeaderboard(timeEntry){
   const query = {UserID : timeEntry.UserID}
-  var leaderboardObject = leaderboardCollection.findOne(query);
+  var leaderboardObject = await leaderboardCollection.findOne(query);
 
   if(leaderboardObject == null){
-    leaderboardCollection.insertOne(timeEntry);
+    await leaderboardCollection.insertOne(timeEntry);
   }
-  else{
-    let prevEntry = leaderboardCollection.findOne(query);
-    if(prevEntry.Time < timeEntry.Time){
-      leaderboardCollection.deleteOne(query);
-      leaderboardCollection.insertOne(timeEntry);
+  else {
+    if(leaderboardObject.Time < timeEntry.Time){
+      await leaderboardCollection.deleteOne(query);
+      await leaderboardCollection.insertOne(timeEntry);
     }
   }
+  var leaderboard = await leaderboardCollection.find().toArray();
+    leaderboard.sort(function(a,b){b.Time - a.Time});
+    leaderboard.reverse();
+    if(leaderboard.length > 10){
+      leaderboard.length = 10;
+    }
+    await leaderboardCollection.deleteMany();
+    await leaderboardCollection.insertMany(leaderboard);
 }
 
 
