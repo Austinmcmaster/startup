@@ -20,23 +20,15 @@ const userCollection = db.collection("user");
 
 async function addUser(User){
   const query = {UserID: User.UserID, username:User.username, email: User.email, password: User.password }
-
-  var check = await userCollection.findOne(query);
-  if(check == null){
-    const result = await userCollection.insertOne(User);
-    return result;
-  }
-  return null;
+  await userCollection.insertOne(User);
+  return await userCollection.findOne(query);
 
 }
 
 async function getUser(User){
   const query = {UserID: User.UserID, username:User.username, email: User.email, password: User.password }
-  var check = await userCollection.findOne(query);
-  if(check != null){
-    return User
-  }
-  return null;
+  return await userCollection.findOne(query);
+
 }
 
 

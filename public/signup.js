@@ -19,10 +19,8 @@ async function signup() {
         .then((response) => response.json())
         .then((jsonResponse) => {
         console.log(jsonResponse);
+        authenticateUser(jsonResponse);
     });
-
-    localStorage.setItem("userObject", JSON.stringify(userObject));
-    window.location.href = "index.html";
 }
 
 const registration_form = document.getElementById("register_form");
@@ -33,4 +31,9 @@ function checkValidity(event){
         event.preventDefault();
         signup();
     }
+}
+
+function authenticateUser(response){
+    localStorage.setItem("userObject",JSON.stringify(response));
+    window.location.href = "index.html";
 }
