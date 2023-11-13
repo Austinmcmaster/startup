@@ -43,8 +43,21 @@ apiRouter.delete('/table/:id', async (req,res) =>{
 
 // User Table Endpoints
 apiRouter.get('/user', async (req,res) => {
-    const user = await DB.getUser(req.body);
-    res.send(user);
+    var object = {
+        email: req.query.email.toUpperCase(),
+        password: req.query.password.toUpperCase(),
+    }
+    const user = await DB.getUser(object);
+    if(user != null){
+        var temp = {
+            username: user.username,
+            UserID: user.UserID
+        }
+        res.send(temp);
+    }
+    else {
+        res.send({});
+    }
 });
 
 apiRouter.post('/user', async (req,res) => {

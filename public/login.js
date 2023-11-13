@@ -9,25 +9,31 @@ function checkValidity(event){
     
 }
 
-async function login(){
-    
+async function login(){   
     const email = document.getElementById("email");
     const password = document.getElementById("password");
-
-    
     try{
-        const response = await fetch('api/user');
-        var users = await response.json();
-        for(i = 0; i < users.length; i ++){
-            var data = users[i];
-            if((email.value.toUpperCase() === data.email) & 
-            (password.value.toUpperCase() === data.password)){
-                localStorage.setItem('userObject', JSON.stringify(data));
-                window.location.href = "index.html";
-                break;
-            }
+        const apiUrl = '/api/user';
+        const parameters = {
+        email: email.value,
+        password: password.value,
+        };
+        // Convert parameters to a query string
+        const queryString = Object.keys(parameters)
+        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(parameters[key])}`)
+        .join('&');
+        const urlWithQueryString = `${apiUrl}?${queryString}`;
+        const response = await fetch(urlWithQueryString);
+        const user = await response.json();
+        if(user.username != null && user.UserID != null){
+            localStorage.setItem('userObject', JSON.stringify(user));
+            window.location.href = "index.html";
         }
-        console.log("Unknown Email or Password");
+        else {
+            console.log("Unknown Login Credentials");
+        }
+
+
 
     }catch {
         console.log("Server Error in fetching User Data");

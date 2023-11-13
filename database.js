@@ -26,9 +26,8 @@ async function addUser(User){
 }
 
 async function getUser(User){
-  const query = {UserID: User.UserID, username:User.username, email: User.email, password: User.password }
+  const query = { email: User.email, password: User.password}
   return await userCollection.findOne(query);
-
 }
 
 
