@@ -73,3 +73,10 @@ For this deliverable, I implemented backend points, that are used in various poi
 * **Third Party endpoints**- Fetch cat quotes that are used within the main page in the text area section. Fetch code located in main.js.
 * **Backend service endpoint**- Setup, for table entries, users, and times for the leaderboard. Used to store data currently instead of local storage.
 * **Front End Calls service endpoint**- All my storage is called using fetch for various reasons of filling the pie chart, leaderboard, table, along with login authentication as well.
+
+## DB deliverable
+For this deliverable I associate the enties with a specific user/ if loggined in/ or unknown/guest. 3 tables were created in the database, user, login and leaderboard. They each store data.
+
+* **MongoDB Atlas database created**- done!
+* **Provides backend endpoints for manipulating application data**- Stores data in the associated tables using previously established backpoints.
+* **Stores application data in MongoDB**- done!
