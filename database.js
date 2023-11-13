@@ -7,6 +7,8 @@ const db = client.db('startup');
 const leaderboardCollection = db.collection('leaderboard');
 const tableCollection = db.collection("entrytable");
 const userCollection = db.collection("user");
+const bcrypt = require('bcrypt');
+const uuid = require('uuid');
 
 
 // This will asynchronously test the connection and exit the process if it fails
@@ -18,18 +20,29 @@ const userCollection = db.collection("user");
   process.exit(1);
 });
 
-async function addUser(User){
-  const query = {UserID: User.UserID, username:User.username, email: User.email, password: User.password }
-  await userCollection.insertOne(User);
-  return await userCollection.findOne(query);
+async function addUser(email, password, username){
+  const passwordHash = await bcrypt.hash(password, 10);
 
+  const user = {
+    email: email,
+    username : username,
+    password : passwordHash,
+    token: uuid.v4(),
+  }
+  await userCollection.insertOne(user);
+  return user;
 }
 
-async function getUser(User){
-  const query = { email: User.email, password: User.password}
-  return await userCollection.findOne(query);
+function getUser(User){
+  const query = { email: User.email}
+  return userCollection.findOne(query);
 }
 
+function getUserByToken(token){
+  return userCollection.findOne({token: token})
+}
+
+// May Need to fix below
 
 async function addEntry(entry){
   const result = await tableCollection.insertOne(entry);

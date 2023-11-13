@@ -31,6 +31,20 @@ app.use('/api', apiRouter);
 
 
 // User Table Endpoints
+apiRouter.post('/auth/create', async (req, res) => {
+    if (await DB.getUser(req.body.email)) {
+      res.status(409).send({ msg: 'Existing user' });
+    } else {
+      const user = await DB.addUser(req.body.email, req.body.password, req.body.username);
+  
+      // Set the cookie
+      setAuthCookie(res, user.token);
+  
+      res.send({
+        id: user._id,
+      });
+    }
+});
 
 apiRouter.post('/auth/login', async (req, res) => {
     const user = await DB.getUser(req.body.email);
@@ -42,6 +56,16 @@ apiRouter.post('/auth/login', async (req, res) => {
       }
     }
     res.status(401).send({ msg: 'Unauthorized' });
+});
+
+apiRouter.get('/user/:email', async (req, res) => {
+    const user = await DB.getUser(req.params.email);
+    if (user) {
+      const token = req?.cookies.token;
+      res.send({ email: user.email, authenticated: token === user.token });
+      return;
+    }
+    res.status(404).send({ msg: 'Unknown' });
 });
 
 
@@ -61,12 +85,12 @@ secureApiRouter.use(async (req, res, next) => {
 
 
 
-apiRouter.get('/times', async (_req,res) => {
+secureApiRouter.get('/times', async (_req,res) => {
     const leaderboard = await DB.getLeaderboard();
     res.send(leaderboard)
 });
 
-apiRouter.post('/times', async (req,res) => {
+secureApiRouter.post('/times', async (req,res) => {
     await DB.updateLeaderboard(req.body);
     const leaderboard = await DB.getLeaderboard();
     res.send(leaderboard);
@@ -74,18 +98,18 @@ apiRouter.post('/times', async (req,res) => {
 })
 
 // Entry Table Endpoints 
-apiRouter.get('/table/:id', async (_req,res) =>{
+secureApiRouter.get('/table/:id', async (_req,res) =>{
     const table = await DB.getEntries(_req.params.id);
     res.send(table);
 });
 
-apiRouter.post('/table', async (req,res) =>{
+secureApiRouter.post('/table', async (req,res) =>{
     await DB.addEntry(req.body);
     const table = await DB.getEntries(req.body.UserID);
     res.send(table);
 });
 
-apiRouter.delete('/table/:id', async (req,res) =>{
+secureApiRouter.delete('/table/:id', async (req,res) =>{
     await DB.deleteEntries(req.params.id);
     var data = await DB.getEntries(req.params.id)
     res.send(data);
