@@ -67,7 +67,7 @@ async function updateLeaderboard(timeEntry){
     }
   }
   var leaderboard = await leaderboardCollection.find().toArray();
-    leaderboard.sort(function(a,b){b.Time - a.Time});
+    leaderboard.sort(function(a,b){a.Time - b.Time});
     leaderboard.reverse();
     if(leaderboard.length > 10){
       leaderboard.length = 10;

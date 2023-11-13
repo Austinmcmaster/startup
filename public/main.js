@@ -119,6 +119,7 @@ function setLeaderboardView(times){
         cell_2.innerHTML = times[i].username
         cell_3.innerHTML = times[i].Time;
     }
+
 }
 
 
