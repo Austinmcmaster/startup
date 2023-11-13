@@ -10,32 +10,16 @@ function checkValidity(event){
 }
 
 async function login(){   
-    const email = document.getElementById("email");
-    const password = document.getElementById("password");
-    try{
-        const apiUrl = '/api/user';
-        const parameters = {
-        email: email.value,
-        password: password.value,
-        };
-        // Convert parameters to a query string
-        const queryString = Object.keys(parameters)
-        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(parameters[key])}`)
-        .join('&');
-        const urlWithQueryString = `${apiUrl}?${queryString}`;
-        const response = await fetch(urlWithQueryString);
-        const user = await response.json();
-        if(user.username != null && user.UserID != null){
-            localStorage.setItem('userObject', JSON.stringify(user));
-            window.location.href = "index.html";
-        }
-        else {
-            console.log("Unknown Login Credentials");
-        }
-
-
-
-    }catch {
-        console.log("Server Error in fetching User Data");
+    const email = document.getElementById("email")?.value;
+    const password = document.getElementById("password")?.value;
+    const response = await fetch('/auth/login', {
+        method: 'post',
+        body: JSON.stringify({ email: email, password: password }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+    });
+    if(response.ok){
+        window.localStorage.href = 'index.html';
     }
 }
