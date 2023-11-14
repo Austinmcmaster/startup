@@ -68,7 +68,8 @@ async function loadtable(){
             data = JSON.parse(entryCache);
         }
     }
-    await makePie();
+    makePie();
+    loadLeaderboard();
     loadTableData(data);
 }
 
@@ -217,7 +218,6 @@ function getUserData(){
 
 
 loadtable();
-loadLeaderboard();
 
 
 

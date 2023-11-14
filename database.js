@@ -60,13 +60,17 @@ function deleteEntries(id){
   tableCollection.deleteMany(query);
 }
 
-async function getLeaderboard(){
-  var leaderboard = await leaderboardCollection.find();
+function getLeaderboard(){
+  const options = {
+    sort: {Time: -1},
+    limit: 10,
+  }
+  var leaderboard = leaderboardCollection.find({},options);
   return leaderboard.toArray();
 }
 
 async function updateLeaderboard(timeEntry){
-  const query = {UserID : timeEntry.UserID}
+  const query = {id : timeEntry.id}
   var leaderboardObject = await leaderboardCollection.findOne(query);
 
   if(leaderboardObject == null){
@@ -78,14 +82,6 @@ async function updateLeaderboard(timeEntry){
       await leaderboardCollection.insertOne(timeEntry);
     }
   }
-  var leaderboard = await leaderboardCollection.find().toArray();
-    leaderboard.sort(function(a,b){a.Time - b.Time});
-    leaderboard.reverse();
-    if(leaderboard.length > 10){
-      leaderboard.length = 10;
-    }
-    await leaderboardCollection.deleteMany();
-    await leaderboardCollection.insertMany(leaderboard);
 }
 
 
