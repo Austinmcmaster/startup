@@ -42,15 +42,14 @@ function getUserByToken(token){
   return userCollection.findOne({token: token})
 }
 
-// May Need to fix below
 
 async function addEntry(entry){
   const result = await tableCollection.insertOne(entry);
   return result;
 }
 
-async function getEntries(userid){
-  const query = {UserID: userid};
+async function getEntries(id){
+  const query = {id: id};
   const cursor = await tableCollection.find(query);
   return cursor.toArray();
 

@@ -96,7 +96,7 @@ secureApiRouter.get('/table/:id', async (_req,res) =>{
 
 secureApiRouter.post('/table', async (req,res) =>{
     await DB.addEntry(req.body);
-    const table = await DB.getEntries(req.body.UserID);
+    const table = await DB.getEntries(req.body.id);
     res.send(table);
 });
 
