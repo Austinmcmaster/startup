@@ -2,7 +2,7 @@ async function loadtable(){
     let data = [];
     let user_info = await getUserData();
     try {
-        const response = await fetch(`api/table/${user_info.UserID}`);
+        const response = await fetch(`api/table/${user_info.id}`);
         data = await response.json();
         localStorage.setItem('table', JSON.stringify(data));
         
@@ -55,12 +55,14 @@ async function fillTable(){
 
 
     const description = document.querySelector("#descriptionbox");
+    const userObject = getUserData();
 
     let tableObject = {
         Subject : subject.value,
         Description: description.value,
         Time: hours,
-        UserID: 3, // Add in ID connected to objects
+        username: userObject.username,
+        id: userObject.id,
         entryID: crypto.randomUUID(),
     };
 
@@ -92,7 +94,7 @@ function loadTableData(data) {
 
 async function clearTable(){
     let user_info = getUserData();
-    fetch(`api/table/${user_info.UserID}`, {
+    fetch(`api/table/${user_info.id}`, {
         method: 'DELETE'})
         .then((response) => response.json())
         .then((jsonResponse) => {

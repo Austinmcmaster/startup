@@ -55,8 +55,8 @@ async function getEntries(id){
 
 }
 
-function deleteEntries(UserID){
-  const query = {UserID: UserID};
+function deleteEntries(id){
+  const query = {id: id};
   tableCollection.deleteMany(query);
 }
 
