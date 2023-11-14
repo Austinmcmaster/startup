@@ -4,23 +4,27 @@ async function signup() {
     const email = document.querySelector("#email");
 
     let userObject = {
-        username : username.value.toUpperCase(),
-        password : password.value.toUpperCase(),
-        email : email.value.toUpperCase(),
-        UserID: crypto.randomUUID(),
+        username : username.value,
+        password : password.value,
+        email : email.value
     }
 
-    fetch('api/user', {
+    const response = await fetch('/api/auth/create', {
         method: 'POST',
         body: JSON.stringify(userObject),
         headers: {
-        'Content-type': 'application/json; charset=UTF-8',},
-        })
-        .then((response) => response.json())
-        .then((jsonResponse) => {
-        console.log(jsonResponse);
-        authenticateUser(jsonResponse);
+        'Content-type': 'application/json; charset=UTF-8',} 
+    
     });
+    if(response.ok){
+        const user = await response.json();
+        var object = {
+            username: user.username,
+            id: user.id,
+        }
+        localStorage.setItem('userObject', JSON.stringify(object));
+        window.location.href = 'index.html';
+    }
 }
 
 const registration_form = document.getElementById("register_form");
@@ -31,9 +35,4 @@ function checkValidity(event){
         event.preventDefault();
         signup();
     }
-}
-
-function authenticateUser(response){
-    localStorage.setItem("userObject",JSON.stringify(response));
-    window.location.href = "index.html";
 }

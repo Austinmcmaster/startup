@@ -33,8 +33,8 @@ async function addUser(email, password, username){
   return user;
 }
 
-function getUser(User){
-  const query = { email: User.email}
+function getUser(email){
+  const query = { email: email}
   return userCollection.findOne(query);
 }
 
@@ -90,4 +90,4 @@ async function updateLeaderboard(timeEntry){
 }
 
 
-module.exports = {getUser,addEntry, getEntries, deleteEntries, getLeaderboard,updateLeaderboard, addUser};
+module.exports = {getUser,addEntry, getEntries, deleteEntries, getLeaderboard,updateLeaderboard, addUser,getUserByToken};

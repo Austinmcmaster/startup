@@ -12,7 +12,7 @@ function checkValidity(event){
 async function login(){   
     const email = document.getElementById("email")?.value;
     const password = document.getElementById("password")?.value;
-    const response = await fetch('/auth/login', {
+    const response = await fetch('/api/auth/login', {
         method: 'post',
         body: JSON.stringify({ email: email, password: password }),
         headers: {
@@ -20,6 +20,12 @@ async function login(){
         },
     });
     if(response.ok){
-        window.localStorage.href = 'index.html';
+        const user = await response.json();
+        var object = {
+            username: user.username,
+            id: user.id,
+        }
+        localStorage.setItem('userObject', JSON.stringify(object));
+        window.location.href = 'index.html';
     }
 }
