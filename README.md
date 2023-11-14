@@ -80,3 +80,10 @@ For this deliverable I associate the enties with a specific user/ if loggined in
 * **MongoDB Atlas database created**- done!
 * **Provides backend endpoints for manipulating application data**- Stores data in the associated tables using previously established backpoints.
 * **Stores application data in MongoDB**- done!
+
+## Login deliverable
+For this deliverable I now have authentication with authtokens and entries are only associated with a given user.
+* **Supports new user registration**- Stores new user data in the mongodb table and returns authtoken
+* **Supports existing user authentication**- Allows for a user to log into the website and view previous entries unless data was cleared with other functionality and store new entries with that user.
+* **Stores and retrieves credentials in MongoDB**- Yes it stores this data in MongoDB
+* **Restricts application functionality based upon authentication**- Leaderboard access, pie chart, and entrie submission are restricted and will not be accepted if a unauthenticated user tries to submit one. 
