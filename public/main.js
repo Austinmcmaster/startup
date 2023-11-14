@@ -51,7 +51,7 @@ async function fillTable(){
     .then((jsonResponse) => {
         console.log(jsonResponse);
     })
-    await makePie();
+
 }
 
 async function loadtable(){
@@ -68,10 +68,12 @@ async function loadtable(){
             data = JSON.parse(entryCache);
         }
     }
+    await makePie();
     loadTableData(data);
 }
 
 function loadTableData(data) {
+    
     var table = document.getElementById('DataTable');
     for(i = 0; i < data.length; i++){
         var row = table.insertRow(i+1);
@@ -245,7 +247,8 @@ async function makePie(){
 
     }
 
-    const colors = ["purple","blue","red","green","black","orange","yellow","white","pink"]
+    const colors = ["purple","blue","red","green","black","orange","yellow","white","pink","DarkGreen", "DarkOrange", "DarkOrchid", "Dark Red",
+                    "DarkSalmon"]
 
     var chart = new Chart("pieChart", {
         type: "pie",
@@ -265,9 +268,9 @@ async function makePie(){
             }
         }
     })
+    chart.render();
 }
 setInterval(function(){makePie()}, 60000);
-makePie();
 
 
 
