@@ -272,6 +272,14 @@ async function makePie(){
 }
 setInterval(function(){makePie()}, 60000);
 
+function logout(){
+    localStorage.removeItem('userObject');
+    localStorage.removeItem('leaderboard');
+    localStorage.removeItem('table');
+    fetch(`/api/auth/logout`, {
+      method: 'delete',
+    }).then(() => (window.location.href = 'login.html'));
+}
 
 
 

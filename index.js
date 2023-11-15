@@ -59,6 +59,11 @@ apiRouter.post('/auth/login', async (req, res) => {
     res.status(401).send({ msg: 'Unauthorized' });
 });
 
+// DeleteAuth token if stored in cookie
+apiRouter.delete('/auth/logout', (_req, res) => {
+  res.clearCookie(authCookieName);
+  res.status(204).end();
+});
 
 
 var secureApiRouter = express.Router();

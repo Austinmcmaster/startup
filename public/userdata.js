@@ -120,3 +120,13 @@ function getUserData(){
 }
 
 loadtable();
+
+
+function logout(){
+    localStorage.removeItem('userObject');
+    localStorage.removeItem('leaderboard');
+    localStorage.removeItem('table');
+    fetch(`/api/auth/logout`, {
+      method: 'delete',
+    }).then(() => (window.location.href = 'login.html'));
+}
