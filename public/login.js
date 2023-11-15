@@ -28,4 +28,9 @@ async function login(){
         localStorage.setItem('userObject', JSON.stringify(object));
         window.location.href = 'index.html';
     }
+    else{
+        const body = await response.json();
+        const message = document.getElementById("errormsg");
+        message.textContent = `⚠ Error: ${body.msg}`;
+    }
 }
