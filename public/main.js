@@ -166,46 +166,6 @@ class TimeAnalytic {
 
 const timeAnalytic = new TimeAnalytic();
 
-
-
-
-const textarea = document.getElementById("webchat");
-const web_button = document.getElementById("web_button");
-const web_input = document.getElementById("web_message");
-
-function loadUsers(){
-    const textarea = document.getElementById("webchat");
-    textarea.value = "";
-    displayQuote();
-
-    setTimeout(() => {
-        textarea.value += "Chris: Connected\n";
-    }, 2000);
-
-    setTimeout(() => {
-        textarea.value += "User1: Connected\n";
-    }, 2000);
-
-    setTimeout(() => {
-        textarea.value += "Dummy1: Connected\n";
-    }, 100000);
-}
-
-
-web_button.addEventListener('click', function handleClick(){
-
-    if(web_input.checkValidity()){
-        user = getUserName();
-        user = user.trim().toLowerCase();
-        textarea.value += user;
-        textarea.value += ": " + web_input.value;
-        textarea.value += "\n";
-        web_input.value = "";
-
-    }
-
-});
-
 function getUserData(){
     const userObject = localStorage.getItem('userObject');
     if(userObject != null){
@@ -217,10 +177,6 @@ function getUserData(){
 
 
 loadtable();
-
-
-
-
 
 async function makePie(){
     let data = [];
@@ -282,6 +238,44 @@ function logout(){
 
 
 // Chat Stuff
+loadUsers();
 
+
+const textarea = document.getElementById("webchat");
+const web_button = document.getElementById("web_button");
+const web_input = document.getElementById("web_message");
+
+function loadUsers(){
+    const textarea = document.getElementById("webchat");
+    textarea.value = "";
+    displayQuote();
+
+    setTimeout(() => {
+        textarea.value += "Chris: Connected\n";
+    }, 2000);
+
+    setTimeout(() => {
+        textarea.value += "User1: Connected\n";
+    }, 2000);
+
+    setTimeout(() => {
+        textarea.value += "Dummy1: Connected\n";
+    }, 100000);
+}
+
+
+web_button.addEventListener('click', function handleClick(){
+
+    if(web_input.checkValidity()){
+        user = getUserName();
+        user = user.trim().toLowerCase();
+        textarea.value += user;
+        textarea.value += ": " + web_input.value;
+        textarea.value += "\n";
+        web_input.value = "";
+
+    }
+
+});
 
 

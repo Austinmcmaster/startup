@@ -212,6 +212,9 @@ button {
     border-color: #34495e;
     color: azure;
 }
+.webchat fieldset {
+    border-color: transparent;
+}
 .webchat input {
     margin: 5px;
     background-color:transparent;
