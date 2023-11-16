@@ -20,14 +20,19 @@ class TimeAnalytic {
 
     constructor(){
     const username = document.getElementById("user_name");
-    username.textContent= this.getUserName();
+    if(this.getUserName()!= null){
+        username.textContent= this.getUserName();
+    }
     }
 
 
     getUserName() {
         const user = getUserData();
-        localStorage.setItem('userObject',JSON.stringify(user));
-        return user.username;
+        if(user != null){
+            localStorage.setItem('userObject',JSON.stringify(user));
+            return user.username;
+        }
+        return null;
         
     }
 }
@@ -94,28 +99,26 @@ function loadTableData(data) {
 
 async function clearTable(){
     let user_info = getUserData();
-    fetch(`api/table/${user_info.id}`, {
-        method: 'DELETE'})
-        .then((response) => response.json())
-        .then((jsonResponse) => {
-        console.log(jsonResponse);
-        });
+    if(user_info != null){
+        fetch(`api/table/${user_info.id}`, {
+            method: 'DELETE'})
+            .then((response) => response.json())
+            .then((jsonResponse) => {
+            console.log(jsonResponse);
+            });
 
-    location.reload();
+        location.reload();
+    }
     
 }
 
 function getUserData(){
     const userObject = localStorage.getItem('userObject');
-    var data = JSON.parse(userObject);
     if(userObject != null){
+        var data = JSON.parse(userObject);
         return data;
     }
-
-    return  {
-        UserID: crypto.randomUUID(), 
-        username: "Unknown User",
-    };
+    return null;
 
 }
 

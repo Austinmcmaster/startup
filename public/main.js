@@ -144,20 +144,24 @@ function displayQuote(data){
 
 
 class TimeAnalytic {
-
     constructor(){
     const username = document.getElementById("user_name");
-    username.textContent= this.getUserName();
-    loadUsers();
+    if(this.getUserName()!= null){
+        username.textContent= this.getUserName();
+    }
     }
 
 
     getUserName() {
         const user = getUserData();
-        localStorage.setItem('userObject',JSON.stringify(user));
-        return user.username;
+        if(user != null){
+            localStorage.setItem('userObject',JSON.stringify(user));
+            return user.username;
+        }
+        return null;
         
     }
+    
 }
 
 const timeAnalytic = new TimeAnalytic();
@@ -204,16 +208,11 @@ web_button.addEventListener('click', function handleClick(){
 
 function getUserData(){
     const userObject = localStorage.getItem('userObject');
-    var data = JSON.parse(userObject);
     if(userObject != null){
+        var data = JSON.parse(userObject);
         return data;
     }
-
-    return  {
-        UserID: crypto.randomUUID(), 
-        username: "Unknown User",
-    };
-
+    return null;
 }
 
 
@@ -280,6 +279,9 @@ function logout(){
       method: 'delete',
     }).then(() => (window.location.href = 'login.html'));
 }
+
+
+// Chat Stuff
 
 
 
