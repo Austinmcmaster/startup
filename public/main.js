@@ -145,10 +145,10 @@ function displayQuote(data){
 
 class TimeAnalytic {
     constructor(){
-    const username = document.getElementById("user_name");
-    if(this.getUserName()!= null){
-        username.textContent= this.getUserName();
-    }
+        const username = document.getElementById("user_name");
+        if(this.getUserName()!= null){
+            username.textContent= this.getUserName();
+        }
     }
 
 
@@ -239,6 +239,7 @@ function logout(){
 
 // Chat Stuff
 loadUsers();
+handleChatBox();
 
 
 const textarea = document.getElementById("webchat");
@@ -277,5 +278,41 @@ web_button.addEventListener('click', function handleClick(){
     }
 
 });
+
+
+function handleChatBox(){
+    const web_button = document.getElementById("web_button");
+    const web_input = document.getElementById("web_message");
+    if(getUserData() == null){
+        web_button.disabled = true;
+        web_input.disabled = true;
+    }
+    else{
+        web_button.disabled = false;
+        web_input.disabled = false;
+    }
+}
+
+function appendMsg(cls,from,msg){
+    textarea.value += `<div><span class="${cls}">${from}</span>: ${msg}</div>\n`;
+}
+
+web_input.addEventListener('keydown', (e)=> {
+    if(e.key === 'Enter'){
+        sendMessage();
+    }
+})
+
+function sendMessage(){
+    const msg = document.getElementById("web_message").value;
+    if(!!msg){
+        appendMsg('me','me',msg);
+        const name = document.getElementById("user_name").value;
+        socket.send(`{"name":"${name}", "msg":"${msg}"}`);
+        msg.value = '';
+    }
+}
+
+
 
 
