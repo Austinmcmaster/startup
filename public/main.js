@@ -144,11 +144,13 @@ function displayQuote(data){
 
 
 class TimeAnalytic {
+    socket;
     constructor(){
         const username = document.getElementById("user_name");
         if(this.getUserName()!= null){
             username.textContent= this.getUserName();
         }
+        makeSocket();
     }
 
 
@@ -250,18 +252,6 @@ function loadUsers(){
     const textarea = document.getElementById("webchat");
     textarea.value = "";
     displayQuote();
-
-    setTimeout(() => {
-        textarea.value += "Chris: Connected\n";
-    }, 2000);
-
-    setTimeout(() => {
-        textarea.value += "User1: Connected\n";
-    }, 2000);
-
-    setTimeout(() => {
-        textarea.value += "Dummy1: Connected\n";
-    }, 100000);
 }
 
 
@@ -269,6 +259,7 @@ web_button.addEventListener('click', function handleClick(){
 
     if(web_input.checkValidity()){
         sendMessage();
+        web_input.value = '';
     }
 
 });
@@ -287,46 +278,50 @@ function handleChatBox(){
     }
 }
 
-function appendMsg(cls,from,msg){
-    textarea.value += `<div><span class="${cls}">${from}</span>: ${msg}</div>\n`;
+function appendMsg(user,msg){
+    textarea.value += `${user}: ${msg}\n`;
 }
 
 web_input.addEventListener('keydown', (e)=> {
     if(e.key === 'Enter'){
         sendMessage();
+        web_input.value = "";
     }
 })
 
 function sendMessage(){
     const msg = document.getElementById("web_message").value;
     if(!!msg){
-        appendMsg('me','me',msg);
-        const name = document.getElementById("user_name").value;
-        socket.send(`{"name":"${name}", "msg":"${msg}"}`);
+        const userObject = getUserData();
+        const name = userObject.username; 
+        appendMsg(name,msg);
+        socket.send(`{"name": "${name}", "msg":"${msg}"}`);
         msg.value = '';
     }
 }
 
-// Adjust the webSocket protocol to what is being used for HTTP
-const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+function makeSocket(){
+    // Adjust the webSocket protocol to what is being used for HTTP
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
 
-// Display that we have opened the webSocket
-socket.onopen = (event) => {
-  appendMsg('system', 'websocket', 'connected');
-};
+    // Display that we have opened the webSocket
+    this.socket.onopen = (event) => {
+        appendMsg("WebSocket", "Connected to server");
+    };
 
-socket.onmessage = async (event) => {
-    const text = await event.data.text();
-    const chat = JSON.parse(text);
-    appendMsg('friend', chat.name, chat.msg);
-};
+    this.socket.onmessage = async (event) => {
+        const text = await event.data.text();
+        const chat = JSON.parse(text);
+        appendMsg( chat.name, chat.msg);
+    };
 
-socket.onclose = (event) => {
-    appendMsg('system', 'websocket', 'disconnected');
-    document.getElementById("web_button").disabled = true;
-    document.getElementById("web_message").disabled = true;
-};
+    this.socket.onclose = (event) => {
+        appendMsg('WebSocket', 'Has been disconnected');
+        document.getElementById("web_button").disabled = true;
+        document.getElementById("web_message").disabled = true;
+    };
+}
 
 
 
