@@ -12,7 +12,7 @@ export function UserData() {
             </tr>
         </thead>
       </table>
-        <button id='tablebutton' onClick="clearTable()">Clear Data</button>
+        <button id='tablebutton'>Clear Data</button>
         <div className="container">
             <form id="time_form">
                 <h2>Time Entry</h2>
