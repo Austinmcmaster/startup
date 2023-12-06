@@ -5,6 +5,7 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { Home } from './home/home';
 import { UserData} from './userdata/userdata';
+import { SignUp} from './signup/signup';
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
             <Route path='/' element ={<Login/>}></Route>
             <Route path='/home' element = {<Home/>}></Route>
             <Route path='/userdata' element = {<UserData/>}></Route>
+            <Route path='/signup' element = {<SignUp/>}></Route> 
             <Route path='*' element={<NotFound/>}></Route>
         </Routes>
     </BrowserRouter>
