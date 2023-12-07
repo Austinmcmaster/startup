@@ -105,14 +105,14 @@ export function Home() {
       </table>
 
       <table id="DataTable">
-        <thead>
-          <tr>
+        <tbody>
+            <tr>
               <th>Subject</th>
               <th>Description</th>
               <th>Time (Hours)</th>
-          </tr>
-          <tbody id='time_entries'>{entryRows}</tbody>
-        </thead>
+            </tr>
+            {entryRows}
+          </tbody>
       </table>
 
       <div className="container">

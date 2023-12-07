@@ -105,14 +105,14 @@ export function UserData() {
   return (
     <main>
       <table id = "DataTable">
-        <thead>
-            <tr>
-              <th>Subject</th>
-              <th>Description</th>
-              <th>Time (Hours)</th>
-            </tr>
-            <tbody>{entryRows}</tbody>
-        </thead>
+        <tbody>
+          <tr>
+            <th>Subject</th>
+            <th>Description</th>
+            <th>Time (Hours)</th>
+          </tr>
+          {entryRows}
+        </tbody>
       </table>
         <button id='tablebutton' onClick={() => clearData()}>Clear Data</button>
         <div className="container">
