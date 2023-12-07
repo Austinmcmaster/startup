@@ -7,6 +7,35 @@ export function Home() {
   const[time2, setTime2] = React.useState(null);
   const[desc, setdesc] = React.useState('');
   const[entries, setEntries] = React.useState([]);
+  const[leaderboard_scores, setleaderboard_scores] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch('api/times')
+      .then((response) => response.json())
+      .then((data) => {
+        setleaderboard_scores(data);
+        localStorage.setItem('leaderboard', JSON.stringify(data));
+      })
+      .catch(() => {
+        const data = localStorage.getItem('leaderboard');
+        if (data) {
+          setleaderboard_scores(JSON.parse(data));
+        }
+      });
+  }, []);
+
+  const leaderboardRows = [];
+  if(leaderboard_scores.length){
+    for(const [i, entry] of leaderboard_scores.entries()){
+      leaderboardRows.push(
+        <tr key ={i}>
+          <td>{i + 1}</td>
+          <td>{entry.username}</td>
+          <td>{entry.Time}</td>
+        </tr>
+      );
+    }
+  }
 
 
   React.useEffect(() => {
@@ -94,14 +123,14 @@ export function Home() {
   return (
     <main className='HomePage'>
       <table className="Leaderboard" id="leaderboard">
-        <thead id='header'>
-          <tr>
+        <tbody id='leaderboard_scores'>
+        <tr>
             <th>Rank</th>
             <th>User</th>
             <th>Time</th>
           </tr>
-        </thead>
-        <tbody id='leaderboard_scores'></tbody>
+          {leaderboardRows}
+        </tbody>
       </table>
 
       <table id="DataTable">
