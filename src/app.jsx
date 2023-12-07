@@ -6,8 +6,19 @@ import { Login } from './login/login';
 import { Home } from './home/home';
 import { UserData} from './userdata/userdata';
 import { SignUp} from './signup/signup';
+import { AuthState } from './Auth/authState';
 
 export default function App() {
+
+  function logout(){
+    localStorage.removeItem('userObject');
+    localStorage.removeItem('leaderboard');
+    localStorage.removeItem('table');
+    fetch(`/api/auth/logout`, {
+      method: 'delete',
+    })
+  }
+
   return (
     <BrowserRouter>
         <header>
@@ -18,7 +29,7 @@ export default function App() {
                 <ul>
                     <li><a></a></li>
                     <li><NavLink to={'home'}>Home Page </NavLink></li>
-                    <li><NavLink to='/'>Logout</NavLink></li>
+                    <li onClick={() => logout()}><NavLink to='/'>Logout</NavLink></li>
                     <li><NavLink to={'userdata'}>Data Page</NavLink></li>
                     <li><NavLink to={"https://github.com/Austinmcmaster/startup"}>GitHub Repository</NavLink></li>
                 </ul>
