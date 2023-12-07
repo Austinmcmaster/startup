@@ -6,6 +6,44 @@ export function Home() {
   const[time1, setTime1] = React.useState(null);
   const[time2, setTime2] = React.useState(null);
   const[desc, setdesc] = React.useState('');
+  const[entries, setEntries] = React.useState([]);
+
+
+  React.useEffect(() => {
+    const user = JSON?.parse(localStorage.getItem('userObject'));
+    fetch(`api/table/${user.id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setEntries(data);
+        localStorage.setItem('table', JSON.stringify(data));
+      })
+      .catch(() => {
+        const data = localStorage.getItem('table');
+        if (data) {
+          setEntries(JSON.parse(data));
+        }
+      });
+  }, []);
+
+  const entryRows = [];
+  if(entries.length){
+    for(const [i,entry] of entries.entries()){
+      entryRows.push(
+        <tr key={i}>
+          <td>{entry.Subject}</td>
+          <td>{entry.Description}</td>
+          <td>{entry.Time}</td>
+        </tr>
+      );
+    }
+  }
+  else{
+    entryRows.push(
+      <tr key ='0'>
+        <td colSpan='3'>Enter your first entry</td>
+      </tr>
+    );
+  }
 
   function createEntry(){
     const getSeconds = s => s.split(":").reduce((acc, curr) => acc * 60 + +curr, 0)
@@ -50,6 +88,7 @@ export function Home() {
     setTime1(null);
     setTime2(null);
     setdesc('');
+    location.reload();
   }
 
   return (
@@ -72,12 +111,12 @@ export function Home() {
               <th>Description</th>
               <th>Time (Hours)</th>
           </tr>
+          <tbody id='time_entries'>{entryRows}</tbody>
         </thead>
-        <tbody id='time_entries'></tbody>
       </table>
 
       <div className="container">
-            <form id="time_form" onSubmit={() => createEntry()}>
+            <form id="time_form" onSubmit={(e) => {createEntry(); e.preventDefault()}}>
                 <h2>Time Entry</h2>
                 <label htmlFor="Subect">Subject</label>
                 <input type="text"id = "Subject" required = "text" placeholder="Enter a associated subject" onChange={(e) => setSubject(e.target.value)}/>

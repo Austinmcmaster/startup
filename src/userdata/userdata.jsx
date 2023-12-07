@@ -87,6 +87,7 @@ export function UserData() {
     setTime1(null);
     setTime2(null);
     setdesc('');
+    location.reload();
   }
 
   function clearData(){
@@ -115,7 +116,7 @@ export function UserData() {
       </table>
         <button id='tablebutton' onClick={() => clearData()}>Clear Data</button>
         <div className="container">
-            <form id="time_form" onSubmit={() => createEntry()}>
+            <form id="time_form" onSubmit={(e) => {createEntry(); e.preventDefault()}}>
                 <h2>Time Entry</h2>
                 <label htmlFor="Subect">Subject</label>
                 <input type="text"id = "Subject" required = "text" placeholder="Enter a description for text." onChange={(e) => setSubject(e.target.value)}/>
