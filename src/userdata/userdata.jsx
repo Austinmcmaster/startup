@@ -5,6 +5,43 @@ export function UserData() {
   const[time1, setTime1] = React.useState(null);
   const[time2, setTime2] = React.useState(null);
   const[desc, setdesc] = React.useState('');
+  const[entries, setEntries] = React.useState([]);
+
+  React.useEffect(() => {
+    const user = JSON?.parse(localStorage.getItem('userObject'));
+    fetch(`api/table/${user.id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setEntries(data);
+        localStorage.setItem('table', JSON.stringify(data));
+      })
+      .catch(() => {
+        const data = localStorage.getItem('table');
+        if (data) {
+          setEntries(JSON.parse(data));
+        }
+      });
+  }, []);
+
+  const entryRows = [];
+  if(entries.length){
+    for(const [i,entry] of entries.entries()){
+      entryRows.push(
+        <tr key={i}>
+          <td>{entry.Subject}</td>
+          <td>{entry.Description}</td>
+          <td>{entry.Time}</td>
+        </tr>
+      );
+    }
+  }
+  else{
+    entryRows.push(
+      <tr key ='0'>
+        <td colSpan='3'>Enter your first entry</td>
+      </tr>
+    );
+  }
   
   function createEntry(){
     const getSeconds = s => s.split(":").reduce((acc, curr) => acc * 60 + +curr, 0)
@@ -59,6 +96,8 @@ export function UserData() {
       .then((response) => response.json())
       .then((jsonResponse) => {
       console.log(jsonResponse);
+      setEntries([]);
+      location.reload();
     });
   }
 
@@ -67,10 +106,11 @@ export function UserData() {
       <table id = "DataTable">
         <thead>
             <tr>
-                <th>Subject</th>
-                <th>Description</th>
-                <th>Time (Hours)</th>
+              <th>Subject</th>
+              <th>Description</th>
+              <th>Time (Hours)</th>
             </tr>
+            <tbody>{entryRows}</tbody>
         </thead>
       </table>
         <button id='tablebutton' onClick={() => clearData()}>Clear Data</button>
