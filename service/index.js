@@ -148,7 +148,6 @@ let connections = [];
 wss.on('connection', (ws) => {
   const connection = { id: connections.length + 1, alive: true, ws: ws };
   connections.push(connection);
-
   // Forward messages to everyone except the sender
   ws.on('message', function message(data) {
     connections.forEach((c) => {

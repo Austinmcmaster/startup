@@ -10,7 +10,7 @@ export function Home() {
   const[leaderboard_scores, setleaderboard_scores] = React.useState([]);
   const[webinput, setwebinput] = React.useState('');
   const[websocket, setwebsocket] = React.useState(null);
-  const[chat, setchat] = React.useState('Welocme to the chat!\n');
+  const[chat, setchat] = React.useState("");
 
   React.useEffect(() => {
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
@@ -160,7 +160,7 @@ export function Home() {
       const userObject = JSON?.parse(localStorage.getItem('userObject')); 
       const name = userObject.username; 
       appendMsg(name,msg);
-      //websocket.send(`{"name": "${name}", "msg":"${msg}"}`);
+      websocket.send(`{"name": "${name}", "msg":"${msg}"}`);
       setwebinput('');
     }
   }
