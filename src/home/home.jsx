@@ -8,6 +8,34 @@ export function Home() {
   const[desc, setdesc] = React.useState('');
   const[entries, setEntries] = React.useState([]);
   const[leaderboard_scores, setleaderboard_scores] = React.useState([]);
+  const[webinput, setwebinput] = React.useState('');
+  const[websocket, setwebsocket] = React.useState(null);
+  const[chat, setchat] = React.useState('Welocme to the chat!\n');
+
+  React.useEffect(() => {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+
+    // Display that we have opened the webSocket
+    socket.onopen = (event) => {
+        appendMsg("WebSocket", "Connected to server");
+        setwebsocket(socket);
+    };
+
+    socket.onmessage = async (event) => {
+        const text = await event.data.text();
+        const chat = JSON.parse(text);
+        appendMsg( chat.name, chat.msg);
+    };
+
+    socket.onclose = (event) => {
+        appendMsg('WebSocket', 'Has been disconnected');
+        document.getElementById("web_button").disabled = true;
+        document.getElementById("web_message").disabled = true;
+        setwebsocket(socket);
+    };
+  }, []);
+
 
   React.useEffect(() => {
     fetch('api/times')
@@ -120,6 +148,28 @@ export function Home() {
     location.reload();
   }
 
+  function appendMsg(user,msg){
+    var text = '';
+    text += chat + `${user}: ${msg}\n`;
+    setchat(text);
+  }
+
+  function sendMessage(){
+    const msg = webinput;
+    if(!!msg){
+      const userObject = JSON?.parse(localStorage.getItem('userObject')); 
+      const name = userObject.username; 
+      appendMsg(name,msg);
+      //websocket.send(`{"name": "${name}", "msg":"${msg}"}`);
+      setwebinput('');
+    }
+  }
+
+
+
+
+
+
   return (
     <main className='HomePage'>
       <table className="Leaderboard" id="leaderboard">
@@ -167,11 +217,11 @@ export function Home() {
         <label htmlFor="webchat">Web Chat</label>
         </div>
         <div className="webchat">
-            <textarea type="text" id="webchat"title="Description_Box" cols="50" rows="8">
-            </textarea>
+            <textarea type="text" id="webchat"title="Description_Box" cols="50" rows="8" value={chat} readOnly={true}></textarea>
+
             <br/>
-            <input type="text" placeholder="Enter text here" id="web_message" required = "text"></input>
-            <button id="web_button">Send Message</button>
+            <input type="text" placeholder="Enter text here" id="web_message" required = "text" onChange={(e) => setwebinput(e.target.value)} value={webinput}/>
+            <button id="web_button"  onClick={(e) => {sendMessage(); e.preventDefault()}}>Send Message</button>
         </div>
 
     </main>
