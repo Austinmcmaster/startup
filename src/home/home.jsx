@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './home.css'
+import {Pie} from 'react-chartjs-2'
+import {Chart as ChartJS, ArcElement, Tooltip,Legend} from "chart.js";
 
 export function Home() {
   const[subject ,setSubject] = React.useState('');
@@ -9,13 +11,12 @@ export function Home() {
   const[entries, setEntries] = React.useState([]);
   const[leaderboard_scores, setleaderboard_scores] = React.useState([]);
   const[webinput, setwebinput] = React.useState('');
-  const[websocket, setwebsocket] = React.useState(null);
+  const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+  const[socket, setwebsocket] = React.useState(new WebSocket(`${protocol}://${window.location.host}/ws`));
   const[chat, setchat] = React.useState("");
+  ChartJS.register(ArcElement,Tooltip,Legend);
 
   React.useEffect(() => {
-    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-    const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
-
     // Display that we have opened the webSocket
     socket.onopen = (event) => {
         appendMsg("WebSocket", "Connected to server");
@@ -32,7 +33,7 @@ export function Home() {
         appendMsg('WebSocket', 'Has been disconnected');
         document.getElementById("web_button").disabled = true;
         document.getElementById("web_message").disabled = true;
-        setwebsocket(socket);
+        setwebsocket(null);
     };
   }, []);
 
@@ -83,6 +84,9 @@ export function Home() {
   }, []);
 
   const entryRows = [];
+  const values = [];
+  const labels = [];
+  const colors = ["purple","blue","red","green","black","orange","yellow","white","pink","DarkGreen", "DarkOrange", "DarkOrchid", "Dark Red","DarkSalmon"]
   if(entries.length){
     for(const [i,entry] of entries.entries()){
       entryRows.push(
@@ -92,6 +96,8 @@ export function Home() {
           <td>{entry.Time}</td>
         </tr>
       );
+      values.push(entry.Time);
+      labels.push(entry.Subject);
     }
   }
   else{
@@ -100,6 +106,19 @@ export function Home() {
         <td colSpan='3'>Enter your first entry</td>
       </tr>
     );
+  }
+
+
+  const data = {
+    datasets: [
+        {
+          label: "# of hours",
+          data: values,
+          backgroundColor: colors,
+        }
+        
+    ],
+    labels:labels
   }
 
   function createEntry(){
@@ -149,9 +168,7 @@ export function Home() {
   }
 
   function appendMsg(user,msg){
-    var text = '';
-    text += chat + `${user}: ${msg}\n`;
-    setchat(text);
+    setchat(chat + `${user}: ${msg}\n`);
   }
 
   function sendMessage(){
@@ -160,15 +177,12 @@ export function Home() {
       const userObject = JSON?.parse(localStorage.getItem('userObject')); 
       const name = userObject.username; 
       appendMsg(name,msg);
-      websocket.send(`{"name": "${name}", "msg":"${msg}"}`);
+      socket.send(`{"name": "${name}", "msg":"${msg}"}`);
       setwebinput('');
     }
   }
 
-
-
-
-
+  
 
   return (
     <main className='HomePage'>
@@ -195,22 +209,21 @@ export function Home() {
       </table>
 
       <div className="container">
-            <form id="time_form" onSubmit={(e) => {createEntry(); e.preventDefault()}}>
-                <h2>Time Entry</h2>
-                <label htmlFor="Subect">Subject</label>
-                <input type="text"id = "Subject" required = "text" placeholder="Enter a associated subject" onChange={(e) => setSubject(e.target.value)}/>
-                <label htmlFor="Time_in">Time In</label>
-                <input type="time" id = "Time_in" required="time" placeholder="Enter Time in" onChange={(e) => setTime1(e.target.value)}/>
-                <label htmlFor="Time_out">Time Out</label>
-                <input type="time" id = "Time_out" required="time" placeholder="Enter Time out"  onChange={(e) => setTime2(e.target.value)}/>
-                <label htmlFor="sub_descript">Description</label>
-                <textarea name = "Description" id="descriptionbox" title="Description_Box" placeholder="Enter Description here." cols="30" rows="5"  onChange={(e) => setdesc(e.target.value)}></textarea>
-                <button className = "entry_button" type="submit">Submit</button>
-            </form>
-
-            <div className="pieContainer">
-            <canvas id = "pieChart" width="400" height="400"></canvas>    
-            </div>
+        <form id="time_form" onSubmit={(e) => {createEntry(); e.preventDefault()}}>
+            <h2>Time Entry</h2>
+            <label htmlFor="Subect">Subject</label>
+            <input type="text"id = "Subject" required = "text" placeholder="Enter a associated subject" onChange={(e) => setSubject(e.target.value)}/>
+            <label htmlFor="Time_in">Time In</label>
+            <input type="time" id = "Time_in" required="time" placeholder="Enter Time in" onChange={(e) => setTime1(e.target.value)}/>
+            <label htmlFor="Time_out">Time Out</label>
+            <input type="time" id = "Time_out" required="time" placeholder="Enter Time out"  onChange={(e) => setTime2(e.target.value)}/>
+            <label htmlFor="sub_descript">Description</label>
+            <textarea name = "Description" id="descriptionbox" title="Description_Box" placeholder="Enter Description here." cols="30" rows="5"  onChange={(e) => setdesc(e.target.value)}></textarea>
+            <button className = "entry_button" type="submit">Submit</button>
+        </form>
+        <div className="pieContainer">
+          <Pie data = {data}/>
+        </div>
       </div>
 
       <div className="weblabel">
@@ -218,7 +231,6 @@ export function Home() {
         </div>
         <div className="webchat">
             <textarea type="text" id="webchat"title="Description_Box" cols="50" rows="8" value={chat} readOnly={true}></textarea>
-
             <br/>
             <input type="text" placeholder="Enter text here" id="web_message" required = "text" onChange={(e) => setwebinput(e.target.value)} value={webinput}/>
             <button id="web_button"  onClick={(e) => {sendMessage(); e.preventDefault()}}>Send Message</button>
