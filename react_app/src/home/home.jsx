@@ -164,7 +164,7 @@ export function Home() {
     setTime1(null);
     setTime2(null);
     setdesc('');
-    location.reload();
+    window.location.reload();
   }
 
   function appendMsg(user,msg){

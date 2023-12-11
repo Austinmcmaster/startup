@@ -87,7 +87,7 @@ export function UserData() {
     setTime1(null);
     setTime2(null);
     setdesc('');
-    location.reload();
+    window.location.reload();
   }
 
   function clearData(){
@@ -98,7 +98,7 @@ export function UserData() {
       .then((jsonResponse) => {
       console.log(jsonResponse);
       setEntries([]);
-      location.reload();
+      window.location.reload();
     });
   }
 

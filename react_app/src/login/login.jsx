@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
-export function Login() {
+export function Login({stateChanger}) {
   const[email,setEmail] = React.useState('');
   const[password,setPassword] = React.useState('');
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ export function Login() {
             id: user.id,
         }
         localStorage.setItem('userObject', JSON.stringify(object));
+        stateChanger(localStorage.getItem('userObject'));
         navigate('/home');
     }
     else{
