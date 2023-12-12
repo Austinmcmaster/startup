@@ -122,7 +122,7 @@ app.use(function (err, req, res, next) {
 });
 
 app.use((_req, res) => {
-    res.sendFile("login.html", {root: 'public'});
+    res.sendFile("index.html", {root: 'public'});
 });
 
 
