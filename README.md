@@ -86,4 +86,12 @@ For this deliverable I now have authentication with authtokens and entries are o
 * **Supports new user registration**- Stores new user data in the mongodb table and returns authtoken
 * **Supports existing user authentication**- Allows for a user to log into the website and view previous entries unless data was cleared with other functionality and store new entries with that user.
 * **Stores and retrieves credentials in MongoDB**- Yes it stores this data in MongoDB
-* **Restricts application functionality based upon authentication**- Leaderboard access, pie chart, and entrie submission are restricted and will not be accepted if a unauthenticated user tries to submit one. 
+* **Restricts application functionality based upon authentication**- Leaderboard access, pie chart, and entrie submission are restricted and will not be accepted if a unauthenticated user tries to submit one.
+
+## React deliverable
+For this deliverable I converted the application into react and components
+
+* **Bundled using WebPack and Babel as generated from using create-react-app**- Done!
+* **Multiple functional react components**- Login,signup,home,userdata are all separate components that work together.
+* **React Router**- Browser Router is implemented to work with given components
+* **Hookes**- Implemented to allow state within the given components such as time entry, leaderboard data.. etc. Use state is used also for authentication as well. 
