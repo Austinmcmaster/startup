@@ -93,5 +93,5 @@ For this deliverable I converted the application into react and components
 
 * **Bundled using WebPack and Babel as generated from using create-react-app**- Done!
 * **Multiple functional react components**- Login,signup,home,userdata are all separate components that work together.
-* **React Router**- Browser Router is implemented to work with given components
+* **React Router**- Browser Router is implemented to work with given components.
 * **Hookes**- Implemented to allow state within the given components such as time entry, leaderboard data.. etc. Use state is used also for authentication as well. 
