@@ -235,7 +235,7 @@ function logout(){
     localStorage.removeItem('table');
     fetch(`/api/auth/logout`, {
       method: 'delete',
-    }).then(() => (window.location.href = 'login.html'));
+    }).then(() => (window.location.href = 'index.html'));
 }
 
 

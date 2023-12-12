@@ -23,7 +23,7 @@ async function signup() {
             id: user.id,
         }
         localStorage.setItem('userObject', JSON.stringify(object));
-        window.location.href = 'index.html';
+        window.location.href = 'home.html';
     }
 }
 

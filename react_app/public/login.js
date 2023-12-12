@@ -26,7 +26,7 @@ async function login(){
             id: user.id,
         }
         localStorage.setItem('userObject', JSON.stringify(object));
-        window.location.href = 'index.html';
+        window.location.href = 'home.html';
     }
     else{
         const body = await response.json();

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="home.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+</head>
+<body>
+    <header class="header">
+        <h1>
+        <img alt = "Time Logo" src = "https://www.freepngimg.com/thumb/clock/11-2-clock-free-png-image.png" width="50px"/>
+        Time Analytics</h1>
+        <ul class="main-nav">
+            <li><a id="user_name"></a></li>
+            <li><a href="home.html"> Home Page</a></li>
+            <li><a onclick="logout()"> Logout</a></li>
+            <li><a href="UserData.html">Data Page</a></li>
+            <li><a href="https://github.com/Austinmcmaster/startup">GitHub Repository</a></li>
+        </ul>
+    </header>
+        <table class="Leaderboard" id="leaderboard">
+            <tr>
+                <th>Rank</th>
+                <th>User</th>
+                <th>Time</th>
+            </tr>
+        </table>
+
+        <table id="DataTable">
+            <tr>
+                <th>Subject</th>
+                <th>Description</th>
+                <th>Time (Hours)</th>
+            </tr>
+        </table>
+        <div class="container">
+            <form id="time_form">
+                <h2>Time Entry</h2>
+                <label for="Subect">Subject</label>
+                <input type="text"id = "Subject" required = "text" placeholder="Enter a associated subject"/>
+                <label for="Time_in">Time In</label>
+                <input type="time" id = "Time_in" required="time" placeholder="Enter Time in">
+                <label for="Time_out">Time Out</label>
+                <input type="time" id = "Time_out" required="time" placeholder="Enter Time out">
+                <label for="sub_descript">Description</label>
+                <textarea name = "Description" id="descriptionbox" title="Description_Box" placeholder="Enter Description here." cols="30" rows="5"></textarea>
+                <button class = "entry_button" type="submit">Submit</button>
+            </form>
+
+            <div class="pieContainer">
+            <canvas id = "pieChart" width="400" height="400"></canvas>    
+            </div>
+        </div>
+
+
+        <div class="weblabel">
+        <label for="webchat">Web Chat</label>
+        </div>
+        <div class="webchat">
+            <textarea type="text" id="webchat"title="Description_Box" cols="50" rows="8">
+            </textarea>
+            <br>
+            <input type="text" placeholder="Enter text here" id="web_message" required = "text"></input>
+            <button id="web_button">Send Message</button>
+        </div>
+
+
+    <footer>
+        <div>
+        <p>Author: Austin McMaster</p>
+        </div>
+    </footer>
+    <script src="main.js"></script>
+
+</body>
+</html>
