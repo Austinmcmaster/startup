@@ -40,7 +40,7 @@ export function SignUp({stateChanger}) {
     <main>
       <div id="lscontainer">
         <form id= "login-form" onSubmit={(e) => e.preventDefault()}>
-            <h2>Login</h2>
+            <h2>Sign Up</h2>
             <div className="form-content">
             <input type="text" id="username" required = "text" placeholder="Username" 
             onChange={(e) => setUserName(e.target.value)}/>
