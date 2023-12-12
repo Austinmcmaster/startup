@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import './app.css';
 
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, NavLink, Navigate, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { Home } from './home/home';
 import { UserData} from './userdata/userdata';
 import { SignUp} from './signup/signup';
+import {Welcome} from './welcome/welcome';
 
 export default function App() {
   const[auth, setauth] = useState(localStorage.getItem('userObject'));
+  const authenticated = localStorage.getItem('userObject') !== null;
 
   function logout(){
     localStorage.removeItem('userObject');
@@ -41,11 +43,16 @@ export default function App() {
                 </ul>
             </nav>
         </header>
+        <footer>
+          <div>
+          <p>Author: Austin McMaster</p>
+          </div>
+        </footer>
 
         <Routes>
-            <Route path='/' element ={<Login stateChanger = {setauth}/>}></Route>
-            <Route path='/home' element = {<Home/>}></Route>
-            <Route path='/userdata' element = {<UserData/>}></Route>
+            <Route path='/' element ={authenticated ? <Welcome/> :<Login stateChanger = {setauth}/>}></Route>
+            <Route path='/home' element = {authenticated ? <Home/> : <Navigate to='/'/>}> </Route>
+            <Route path='/userdata' element = {authenticated ? <UserData/>: <Navigate to='/'/> }></Route>
             <Route path='/signup' element = {<SignUp stateChanger = {setauth}/>}></Route> 
             <Route path='*' element={<NotFound/>}></Route>
         </Routes>
@@ -53,6 +60,9 @@ export default function App() {
   );
 
   function NotFound(){
-    return <main className='container-fluid bg-secondary text-center'>404: Return to sender. Address unknown.</main>;
-  }
+    return (
+    <main>
+      <a>Path unknown return to home</a>
+    </main>
+  )};
 }
