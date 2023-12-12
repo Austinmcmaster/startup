@@ -182,6 +182,13 @@ export function Home() {
     }
   }
 
+  const handleKeyDown = (event) => {
+    if(event.key == "Enter"){
+      event.preventDefault();
+      sendMessage();
+    }
+  }
+
   
 
   return (
@@ -233,7 +240,7 @@ export function Home() {
             <textarea type="text" id="webchat"title="Description_Box" cols="50" rows="8" value={chat} readOnly={true}></textarea>
             <br/>
             <input type="text" placeholder="Enter text here" id="web_message" required = "text" onChange={(e) => setwebinput(e.target.value)} value={webinput}/>
-            <button id="web_button"  onClick={(e) => {sendMessage(); e.preventDefault()}}>Send Message</button>
+            <button id="web_button" onKeyDown={() => handleKeyDown()}  onClick={(e) => {sendMessage(); e.preventDefault()}}>Send Message</button>
         </div>
 
     </main>
