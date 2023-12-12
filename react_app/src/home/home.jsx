@@ -164,7 +164,6 @@ export function Home() {
     setTime1(null);
     setTime2(null);
     setdesc('');
-    window.location.reload();
   }
 
   function appendMsg(user,msg){
@@ -216,7 +215,7 @@ export function Home() {
       </table>
 
       <div className="container">
-        <form id="time_form" onSubmit={(e) => {createEntry(); e.preventDefault()}}>
+        <form id="time_form" onSubmit={(e) => {createEntry()}}>
             <h2>Time Entry</h2>
             <label htmlFor="Subect">Subject</label>
             <input type="text"id = "Subject" required = "text" placeholder="Enter a associated subject" onChange={(e) => setSubject(e.target.value)}/>
