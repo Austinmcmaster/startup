@@ -53,8 +53,9 @@ export default function App() {
             <Route path='/' element ={authenticated ? <Welcome/> :<Login stateChanger = {setauth}/>}></Route>
             <Route path='/home' element = {authenticated ? <Home/> : <Navigate to='/'/>}> </Route>
             <Route path='/userdata' element = {authenticated ? <UserData/>: <Navigate to='/'/> }></Route>
-            <Route path='/signup' element = {<SignUp stateChanger = {setauth}/>}></Route> 
-            <Route path='*' element={<NotFound/>}></Route>
+            <Route path='/signup' element = {<SignUp stateChanger = {setauth}/>}></Route>
+            <Route path='/welcome' element = {<Welcome/>}></Route> 
+            <Route path='*' element={authenticated ? <Navigate to='/welcome'/> : <Navigate to='/'/>}></Route>
         </Routes>
     </BrowserRouter>
   );
